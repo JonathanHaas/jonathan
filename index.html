@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L. Jonathan Haas</title>
+<meta name="description" content="L. Jonathan Haas — Director, Web Development at the University of Pennsylvania.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Mid-century living room: oat weave walls, walnut casework, moss upholstery, brass hardware.
+     Layout: one calm column under a walnut rule, experience read like a drawer of dated labels. */
+  --oat: #efe9df;
+  --linen: #f7f3ec;
+  --walnut: #5b3a24;
+  --walnut-dark: #3b2517;
+  --moss: #5f6b45;
+  --brass: #b08a3e;
+  --ink: #2a221c;
+  --muted: #74685d;
+  --rule: #d9cfc0;
+  --display: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--oat);
+  /* natural weave texture */
+  background-image:
+    repeating-linear-gradient(0deg, rgba(91,58,36,.035) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(90deg, rgba(91,58,36,.03) 0 2px, transparent 2px 6px);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--walnut); text-decoration-color: var(--brass); text-underline-offset: 3px; }
+a:hover { color: var(--moss); }
+a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+header.top { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; gap: 16px; flex-wrap: wrap; }
+.mark { font: 600 1.05rem var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--walnut-dark); text-decoration: none; }
+nav { display: flex; gap: 22px; flex-wrap: wrap; }
+nav a { font: 500 .95rem var(--display); color: var(--muted); text-decoration: none; letter-spacing: .04em; }
+nav a:hover { color: var(--walnut); }
+
+/* Hero */
+.hero { padding: 48px 0 40px; border-bottom: 6px solid var(--walnut); }
+.hero h1 { font: 500 clamp(2.6rem, 6vw, 4rem)/1.02 var(--display); letter-spacing: -.01em; margin: 0 0 18px; color: var(--walnut-dark); text-wrap: balance; }
+.role { font: 500 1.1rem var(--display); color: var(--moss); letter-spacing: .02em; margin: 0 0 14px; }
+.hero p.lede { margin: 0; max-width: 52ch; color: var(--ink); font-size: 1.12rem; }
+
+
+section { padding: 64px 0 8px; }
+h2 { font: 500 .85rem var(--display); letter-spacing: .22em; text-transform: uppercase; color: var(--moss); margin: 0 0 24px; display: flex; align-items: center; gap: 14px; }
+h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.about p { max-width: 62ch; margin: 0 0 14px; }
+
+/* Experience */
+.job { background: var(--linen); border: 1px solid var(--rule); border-left: 6px solid var(--walnut); border-radius: 4px; padding: 26px 28px; }
+.job-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.job-head h3 { font: 600 1.35rem var(--display); margin: 0; color: var(--walnut-dark); }
+.dates { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .95rem; white-space: nowrap; }
+.ladder { list-style: none; padding: 0; margin: 16px 0 18px; display: grid; gap: 6px; }
+.ladder li { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.ladder li span:first-child { display: flex; align-items: center; gap: 10px; }
+.ladder li span:first-child::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--rule); flex: none; }
+.ladder li.now span:first-child { font-weight: 700; }
+.ladder li.now span:first-child::before { background: var(--brass); }
+.job ul.pts { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.job ul.pts li::marker { color: var(--brass); }
+
+.earlier { margin-top: 28px; display: grid; gap: 0; }
+.earlier div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 2px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+.earlier div:first-child { border-top: 1px solid var(--rule); }
+.earlier b { font-weight: 700; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.skill { background: var(--linen); border: 1px solid var(--rule); border-radius: 4px; padding: 18px 20px; }
+.skill h3 { font: 600 1rem var(--display); margin: 0 0 6px; color: var(--walnut-dark); letter-spacing: .02em; }
+.skill p { margin: 0; color: var(--muted); font-size: .98rem; }
+
+.edu { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.edu h3 { font: 600 1.15rem var(--display); margin: 0; color: var(--walnut-dark); }
+
+/* Contact */
+.contact { margin: 72px 0 0; background: var(--moss); color: var(--linen); border-radius: 6px; padding: 40px 36px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+.contact h2 { color: #e6dcc3; margin-bottom: 10px; }
+.contact h2::after { background: rgba(247,243,236,.25); }
+.contact p { margin: 0; font-size: 1.15rem; max-width: 40ch; }
+.contact .links { display: grid; gap: 10px; }
+.contact a { color: var(--linen); text-decoration-color: var(--brass); font: 500 1.05rem var(--display); }
+.contact a:hover { color: #e6dcc3; }
+footer { padding: 36px 0 44px; color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.role { font-size: 1.25rem; }
+@media (max-width: 720px) {
+  .hero { padding: 24px 0 32px; }
+    .skills { grid-template-columns: 1fr; }
+  .contact { grid-template-columns: 1fr; padding: 30px 24px; }
+  .job { padding: 22px 20px; }
+  section { padding-top: 52px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes glow { from { opacity: .35; } to { opacity: .6; } }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#top" id="top">LJ Haas</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Say hi</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="role">Hi, I'm Jonathan.</p>
+      <h1><span class="init">L.</span> Jonathan Haas</h1>
+      <p class="lede">I run web development at the University of Pennsylvania. Twenty-five years in software, thirteen at Penn, and still the guy who'd rather fix the server than schedule a meeting about it.</p>
+    </div>
+  </div>
+
+  <section class="about" id="about">
+    <h2>About</h2>
+    <p>I started at Penn as a senior developer in 2013 and now direct web development for the university's most visible sites, Penn Today and the flagship site among them.</p>
+    <p>My job is part strategy, part plumbing: hosting, deployments, accessibility, and translating between editorial teams, leadership and engineers. I still write code, because that's the fun part.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <article class="job">
+      <div class="job-head">
+        <h3>University of Pennsylvania</h3>
+        <span class="dates">Philadelphia · 2013–Present</span>
+      </div>
+      <ul class="ladder">
+        <li class="now"><span>Director, Web Development</span><span class="dates">2022–Present</span></li>
+        <li><span>Web Development Manager</span><span class="dates">2016–2022</span></li>
+        <li><span>Senior Web Developer</span><span class="dates">2013–2016</span></li>
+      </ul>
+      <ul class="pts">
+        <li>Lead the web platform behind Penn Today, the university flagship site and a portfolio of school and executive-office sites.</li>
+        <li>Set technical direction across hosting, deployment and development standards, including the move to modern Drupal on managed cloud hosting.</li>
+        <li>Built and grew the team's practices for accessibility, documentation and project delivery.</li>
+        <li>Serve as the university's lead on hosting-vendor partnerships and on web governance with communications leadership.</li>
+      </ul>
+    </article>
+
+    <div class="earlier" aria-label="Earlier experience">
+      <div><span><b>GSI Commerce / eBay</b> · Senior Software Engineer</span><span class="dates">2012–2013</span></div>
+      <div><span><b>Galaxy Systems</b> · Software Engineer</span><span class="dates">2011–2012</span></div>
+      <div><span><b>GlobalFit</b> · Software Engineer</span><span class="dates">2007–2010</span></div>
+      <div><span><b>GSI Commerce</b> · Software Engineer</span><span class="dates">2000–2006</span></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill"><h3>Web platforms</h3><p>Drupal, Pantheon, Composer, Lando, Cloudflare Pages, accessibility (WCAG)</p></div>
+      <div class="skill"><h3>DevOps</h3><p>GitHub Actions, Git, Docker, Linux administration, DNS, Cloudflare Zero Trust, Tailscale</p></div>
+      <div class="skill"><h3>Languages</h3><p>PHP, Java, JavaScript / Node.js, Python, HTML/CSS</p></div>
+      <div class="skill"><h3>Leadership</h3><p>Vendor partnerships, technical documentation, Jira, Confluence, AI-assisted development</p></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu"><h3>Information Systems, Drexel University</h3><span class="dates">1995–2000</span></div>
+  </section>
+
+  <div class="contact" id="contact">
+    <div>
+      <h2>Say hi</h2>
+      <p>Happy to talk web platforms, digital teams, or where to get a good sandwich in Fishtown.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:jonathan.haas@gmail.com">jonathan.haas@gmail.com</a>
+      <a href="https://github.com/JonathanHaas">github.com/JonathanHaas</a>
+      <a href="https://www.instagram.com/jawnhaas/">@jawnhaas on Instagram</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 L. Jonathan Haas</span>
+    <span>Made in Fishtown, Philadelphia</span>
+  </footer>
+</div>
+</body>
+</html>
