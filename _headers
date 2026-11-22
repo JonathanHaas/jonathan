@@ -1,3 +1,9 @@
 /L-Jonathan-Haas-CV.pdf
   Cache-Control: no-cache
   Content-Disposition: attachment; filename="L-Jonathan-Haas-CV.pdf"
+
+/cv.md
+  Content-Type: text/markdown; charset=utf-8
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8

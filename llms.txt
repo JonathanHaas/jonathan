@@ -1,0 +1,21 @@
+# L. Jonathan Haas
+
+> Director, Web Development, University Communications at the University of Pennsylvania. Twenty-five years in software, thirteen at Penn. Manages the communications side of Penn's websites, including Penn Today, the university flagship site and the sites under the President's Center. Based in Philadelphia.
+
+Jonathan leads hosting, deployments, accessibility and development standards for Penn's most visible web properties, and still writes code. Skills include Drupal, Pantheon, Cloudflare, GitHub Actions, Docker, Linux administration, PHP, JavaScript / Node.js, Python and AI-assisted development with Claude.
+
+## CV
+
+- [CV in Markdown](https://jonathan.jawnhaas.xyz/cv.md): full experience, skills and education as plain text
+- [CV as PDF](https://jonathan.jawnhaas.xyz/L-Jonathan-Haas-CV.pdf): one-page printable version
+
+## Profiles
+
+- [Website](https://jonathan.jawnhaas.xyz/)
+- [LinkedIn](https://www.linkedin.com/in/jonathan-haas-8728328/)
+- [GitHub](https://github.com/JonathanHaas)
+- [Instagram](https://www.instagram.com/jawnhaas/)
+
+## Contact
+
+- Email: jonathan.haas@gmail.com
