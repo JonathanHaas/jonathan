@@ -44,7 +44,7 @@ a:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-r
 
 /* Header */
 header.top { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; gap: 16px; flex-wrap: wrap; }
-.mark { font: 600 1.3rem var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--walnut-dark); text-decoration: none; }
+.mark { font: 600 1.6rem var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--walnut-dark); text-decoration: none; }
 nav { display: flex; gap: 22px; flex-wrap: wrap; }
 nav a { font: 500 .95rem var(--display); color: var(--muted); text-decoration: none; letter-spacing: .04em; }
 nav a:hover { color: var(--walnut); }
@@ -102,6 +102,7 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
 footer { padding: 36px 0 44px; color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 @media (max-width: 720px) {
+  .mark { font-size: 1.3rem; }
   .hero { padding: 24px 0 32px; }
     .skills { grid-template-columns: 1fr; }
   .contact { grid-template-columns: 1fr; padding: 30px 24px; }
