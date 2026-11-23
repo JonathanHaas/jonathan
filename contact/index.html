@@ -11,15 +11,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/page.css">
+<link rel="stylesheet" href="/site.css">
 </head>
-<body>
-<a class="skip" href="#main">Skip to main content</a>
+<body class="interior">
 <div class="wrap">
-  <header>
-    <p class="mark"><a href="/">L. Jonathan Haas</a></p>
-    <nav aria-label="Primary"><a href="/about/">About</a><a href="/contact/" aria-current="page">Contact</a><a href="/privacy/">Privacy</a></nav>
-  </header>
+  {% include "header.njk" %}
   <main id="main">
     <h1>Contact</h1>
     <p class="lede">The simplest way to reach me is by email. I’m based in Philadelphia and welcome thoughtful professional conversations about web development and digital work.</p>
@@ -38,7 +34,7 @@
     <p>You can review public code and projects on <a href="https://github.com/JonathanHaas">GitHub</a>, see my professional history on <a href="https://www.linkedin.com/in/jonathan-haas-8728328/">LinkedIn</a>, or find personal posts on <a href="https://www.instagram.com/jawnhaas/">Instagram</a>. If you are contacting me about a specific repository or post, including its link will help me respond more quickly.</p>
     <p>I read legitimate messages, but I may not respond to bulk sales outreach, unsolicited recruiting sequences, link-placement requests, or requests to publish sponsored content. Please do not send confidential information, credentials, private student information, or security-sensitive details by ordinary email.</p>
   </main>
-  <!-- include:footer -->
+  {% include "footer.njk" %}
 </div>
 </body>
 </html>

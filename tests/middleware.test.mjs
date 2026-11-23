@@ -1,12 +1,13 @@
-// Tests for functions/_middleware.js. Run from the repo root with: node --test
-// No dependencies: Node 22+ provides Request, Response, Headers and node:test.
+// Tests for the Eleventy output and functions/_middleware.js. Run with: npm test
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { onRequest, prefersMarkdown } from "../functions/_middleware.js";
 
-const root = new URL("../", import.meta.url);
-const read = (f) => readFileSync(new URL(f, root), "utf8");
+const projectRoot = new URL("../", import.meta.url);
+const outputRoot = new URL("../dist/", import.meta.url);
+const read = (f) => readFileSync(new URL(f, outputRoot), "utf8");
+const readSource = (f) => readFileSync(new URL(f, projectRoot), "utf8");
 const assets = {
   "/": ["index.html", "text/html"],
   "/favicon.svg": ["favicon.svg", "image/svg+xml"],
@@ -20,7 +21,6 @@ const assets = {
   "/about/": ["about/index.html", "text/html"],
   "/contact/": ["contact/index.html", "text/html"],
   "/privacy/": ["privacy/index.html", "text/html"],
-  "/partials/footer.html": ["partials/footer.html", "text/html"],
 };
 
 // Stand-in for Cloudflare Pages static serving: known files return 200, anything else 404.html with 404.
@@ -183,42 +183,46 @@ test("Worker entry gives the same answers as the Pages middleware", async () => 
   assert.match(await missing.text(), /404: page not found/);
 });
 
-test("shared footer is filled in on the homepage", async () => {
+test("Eleventy renders one shared header and footer on the homepage", async () => {
   const html = await (await call("/", "text/html")).text();
-  assert.doesNotMatch(html, /include:footer/);
-  assert.match(html, /<footer class="site-footer">/);
+  assert.match(html, /<header class="top">/);
+  assert.match(html, /<footer>/);
   assert.match(html, /Made in Fishtown, Philadelphia/);
+  assert.equal(html.match(/<header/g).length, 1);
   assert.equal(html.match(/<footer/g).length, 1);
 });
 
-test("subpages get the same footer as the homepage", async () => {
-  const footer = read("partials/footer.html").trim();
+test("every page gets the same generated header and footer", async () => {
+  const home = await (await call("/", "text/html")).text();
+  const header = home.match(/<header[\s\S]*?<\/header>/)?.[0];
+  const footer = home.match(/<footer[\s\S]*?<\/footer>/)?.[0];
+  assert.ok(header && footer);
+
   for (const path of ["/about/", "/contact/", "/privacy/"]) {
     const html = await (await call(path, "text/html")).text();
+    assert.ok(html.includes(header), path);
     assert.ok(html.includes(footer), path);
-    assert.doesNotMatch(html, /include:footer/, path);
   }
-});
 
-test("the 404 page gets the same footer as the homepage", async () => {
-  const footer = read("partials/footer.html").trim();
-  const home = await (await call("/", "text/html")).text();
   const missing = await call("/nope", "text/html");
   assert.equal(missing.status, 404);
   const html = await missing.text();
-  assert.doesNotMatch(html, /include:footer/);
-  assert.ok(home.includes(footer) && html.includes(footer));
+  assert.ok(html.includes(header));
+  assert.ok(html.includes(footer));
 });
 
-test("Markdown responses don't get the HTML footer", async () => {
+test("Markdown responses don't get the HTML layout", async () => {
   const md = await (await call("/", "text/markdown")).text();
+  assert.doesNotMatch(md, /<header/);
   assert.doesNotMatch(md, /<footer/);
 });
 
-test("every HTML page uses the footer include, not its own footer", () => {
+test("every HTML source uses the Eleventy header and footer includes", () => {
   for (const f of ["index.html", "404.html", "about/index.html", "contact/index.html", "privacy/index.html"]) {
-    const src = read(f);
-    assert.match(src, /<!-- include:footer -->/, f);
+    const src = readSource(f);
+    assert.match(src, /{% include "header\.njk" %}/, f);
+    assert.match(src, /{% include "footer\.njk" %}/, f);
+    assert.doesNotMatch(src, /<header/, f);
     assert.doesNotMatch(src, /<footer/, f);
   }
 });

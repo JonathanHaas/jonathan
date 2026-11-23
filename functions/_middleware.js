@@ -2,8 +2,7 @@
 // - GET / with Accept preferring text/markdown returns index.md as text/markdown.
 // - GET /?mode=agent returns a structured JSON description for agents.
 // - Any 404 requested with Accept preferring text/markdown returns a short Markdown error.
-// - Browsers (Accept: text/html) get the normal static site, with shared partials
-//   filled in: "<!-- include:footer -->" becomes partials/footer.html on every page.
+// - Browsers (Accept: text/html) get the Eleventy-generated static site.
 
 const MARKDOWN = "text/markdown; charset=utf-8";
 const JSON_TYPE = "application/json; charset=utf-8";
@@ -60,24 +59,6 @@ function addVaryAccept(response) {
   return withHeaders(response, { Vary: vary ? `${vary}, Accept` : "Accept" });
 }
 
-const INCLUDE = /<!--\s*include:([a-z0-9-]+)\s*-->/g;
-
-// Replace <!-- include:name --> markers in an HTML response with partials/name.html.
-async function fillIncludes(response, env, url, method) {
-  const type = response.headers.get("Content-Type") || "";
-  if (method === "HEAD" || !type.startsWith("text/html") || !response.body) return response;
-  const html = await response.text();
-  const names = [...new Set([...html.matchAll(INCLUDE)].map((m) => m[1]))];
-  const parts = {};
-  for (const name of names) {
-    const r = await env.ASSETS.fetch(new URL(`/partials/${name}.html`, url));
-    parts[name] = r.ok ? (await r.text()).trim() : "";
-  }
-  const headers = new Headers(response.headers);
-  headers.delete("Content-Length");
-  return new Response(html.replace(INCLUDE, (_, name) => parts[name]), { status: response.status, statusText: response.statusText, headers });
-}
-
 export async function onRequest(context) {
   const { request, env, next } = context;
   const method = request.method;
@@ -116,7 +97,6 @@ export async function onRequest(context) {
     });
   }
 
-  const filled = await fillIncludes(response, env, url, method);
-  if (isHome || response.status === 404) return addVaryAccept(filled);
-  return filled;
+  if (isHome || response.status === 404) return addVaryAccept(response);
+  return response;
 }

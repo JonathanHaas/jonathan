@@ -1,0 +1,14 @@
+{
+  "name": "jonathan-haas-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "deploy": "npm run build && npx wrangler deploy",
+    "test": "npm run build && node --test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "latest"
+  }
+}
