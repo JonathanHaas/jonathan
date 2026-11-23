@@ -8,7 +8,8 @@
 <meta name="author" content="L. Jonathan Haas">
 <meta name="keywords" content="L. Jonathan Haas, Jonathan Haas, University of Pennsylvania, University Communications, Penn Today, web development, web platforms, Drupal, Pantheon, Cloudflare, accessibility, WCAG 2.2, DevOps, GitHub Actions, Docker, Linux administration, digital teams">
 <link rel="canonical" href="https://jonathan.jawnhaas.xyz/">
-<link rel="alternate" type="text/markdown" href="/cv.md" title="CV (Markdown)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="text/markdown" href="/index.md" title="Homepage (Markdown)">
 <!-- Social sharing (Open Graph: Facebook, LinkedIn) -->
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="L. Jonathan Haas">
@@ -23,6 +24,12 @@
 <meta property="og:image:alt" content="L. Jonathan Haas. Hi, I'm Jonathan. Web platforms. Digital teams. Still fixing the server. jonathan.jawnhaas.xyz">
 <meta property="profile:first_name" content="Jonathan">
 <meta property="profile:last_name" content="Haas">
+<!-- Social sharing (X/Twitter) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="L. Jonathan Haas · Director of Web Development at Penn">
+<meta name="twitter:description" content="I run web development for University Communications at the University of Pennsylvania. Twenty-five years in software, thirteen at Penn.">
+<meta name="twitter:image" content="https://jonathan.jawnhaas.xyz/og-image.png">
+<meta name="twitter:image:alt" content="L. Jonathan Haas. Hi, I'm Jonathan. Web platforms. Digital teams. Still fixing the server. jonathan.jawnhaas.xyz">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -124,14 +131,20 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
 .contact a { color: var(--linen); text-decoration-color: var(--brass); font: 500 1.05rem var(--display); }
 .contact a:hover { color: #efe8d6; }
 .contact a:focus-visible { outline-color: var(--linen); }
+.contact .qr { display: grid; grid-template-columns: 88px minmax(0, 10ch); gap: 12px; align-items: center; margin-top: 8px; text-decoration: none; font-size: .9rem; line-height: 1.25; }
+.contact .qr img { width: 88px; height: 88px; border-radius: 4px; }
 
 @media (max-width: 720px) {
   .mark { font-size: 1.3rem; }
   .hero { padding: 24px 0 32px; }
     .skills { grid-template-columns: 1fr; }
   .contact { grid-template-columns: 1fr; padding: 30px 24px; }
+  .contact .qr { display: none; }
   .job { padding: 22px 20px; }
   section { padding-top: 52px; }
+}
+@media print {
+  .contact .qr { display: grid; }
 }
 @media (prefers-reduced-motion: no-preference) {
     @keyframes glow { from { opacity: .35; } to { opacity: .6; } }
@@ -140,11 +153,15 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "url": "https://jonathan.jawnhaas.xyz/",
-  "name": "L. Jonathan Haas",
-  "keywords": "L. Jonathan Haas, Jonathan Haas, University of Pennsylvania, University Communications, Penn Today, web development, web platforms, Drupal, Pantheon, Cloudflare, accessibility, WCAG 2.2, DevOps, GitHub Actions, Docker, Linux administration, digital teams",
-  "mainEntity": {
+  "@graph": [
+  {
+    "@type": "ProfilePage",
+    "@id": "https://jonathan.jawnhaas.xyz/#profile-page",
+    "url": "https://jonathan.jawnhaas.xyz/",
+    "name": "L. Jonathan Haas",
+    "keywords": "L. Jonathan Haas, Jonathan Haas, University of Pennsylvania, University Communications, Penn Today, web development, web platforms, Drupal, Pantheon, Cloudflare, accessibility, WCAG 2.2, DevOps, GitHub Actions, Docker, Linux administration, digital teams",
+    "publisher": { "@id": "https://jonathan.jawnhaas.xyz/#organization" },
+    "mainEntity": {
     "@type": "Person",
     "@id": "https://jonathan.jawnhaas.xyz/#person",
     "name": "L. Jonathan Haas",
@@ -210,7 +227,30 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
       "Claude",
       "AI-assisted development"
     ]
+    }
+  },
+  {
+    "@type": "Organization",
+    "@id": "https://jonathan.jawnhaas.xyz/#organization",
+    "name": "L. Jonathan Haas",
+    "url": "https://jonathan.jawnhaas.xyz/",
+    "description": "The personal professional website of L. Jonathan Haas, a web development leader based in Philadelphia.",
+    "email": "mailto:jonathan.haas@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Philadelphia",
+      "addressRegion": "PA",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "professional inquiries",
+      "email": "jonathan.haas@gmail.com",
+      "url": "https://jonathan.jawnhaas.xyz/contact/",
+      "availableLanguage": "English"
+    }
   }
+  ]
 }
 </script>
 </head>
@@ -298,6 +338,10 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
       <a href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">Download CV (PDF)</a>
       <a href="https://github.com/JonathanHaas">github.com/JonathanHaas</a>
       <a href="https://www.instagram.com/jawnhaas/">@jawnhaas on Instagram</a>
+      <a class="qr" href="https://jonathan.jawnhaas.xyz/" aria-label="Open jonathan.jawnhaas.xyz on your phone">
+        <img src="/qr-code.svg" width="88" height="88" alt="">
+        <span>Open this site on your phone</span>
+      </a>
     </div>
   </div>
   </main>

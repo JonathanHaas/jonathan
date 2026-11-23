@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "mode": "agent",
+  "name": "L. Jonathan Haas",
+  "canonical_url": "https://jonathan.jawnhaas.xyz/",
+  "description": "Professional profile of L. Jonathan Haas, Director of Web Development in University Communications at the University of Pennsylvania.",
+  "entity": {
+    "type": "Person",
+    "location": "Philadelphia, Pennsylvania, US",
+    "job_title": "Director, Web Development"
+  },
+  "capabilities": [
+    {
+      "id": "professional_profile",
+      "description": "Read professional background, experience, skills, and education.",
+      "endpoint": "https://jonathan.jawnhaas.xyz/about.md",
+      "method": "GET",
+      "media_type": "text/markdown"
+    },
+    {
+      "id": "curriculum_vitae",
+      "description": "Retrieve the complete curriculum vitae in Markdown or PDF.",
+      "endpoint": "https://jonathan.jawnhaas.xyz/cv.md",
+      "method": "GET",
+      "media_type": "text/markdown"
+    },
+    {
+      "id": "contact_information",
+      "description": "Read professional contact guidance and public profile links.",
+      "endpoint": "https://jonathan.jawnhaas.xyz/contact.md",
+      "method": "GET",
+      "media_type": "text/markdown"
+    }
+  ],
+  "endpoints": {
+    "html_home": {
+      "url": "https://jonathan.jawnhaas.xyz/",
+      "method": "GET",
+      "media_type": "text/html"
+    },
+    "markdown_home": {
+      "url": "https://jonathan.jawnhaas.xyz/index.md",
+      "method": "GET",
+      "media_type": "text/markdown"
+    },
+    "agent_view": {
+      "url": "https://jonathan.jawnhaas.xyz/?mode=agent",
+      "method": "GET",
+      "media_type": "application/json"
+    },
+    "llms": {
+      "url": "https://jonathan.jawnhaas.xyz/llms.txt",
+      "method": "GET",
+      "media_type": "text/plain"
+    },
+    "sitemap": {
+      "url": "https://jonathan.jawnhaas.xyz/sitemap.xml",
+      "method": "GET",
+      "media_type": "application/xml"
+    }
+  },
+  "api": {
+    "available": false,
+    "endpoints": [],
+    "note": "This is a public professional information site. It does not offer a transactional API. The read-only content endpoints above are the supported machine-readable interfaces."
+  },
+  "authentication": {
+    "required": false,
+    "methods": [],
+    "note": "All published resources are public and read-only. No credentials or API keys are required."
+  },
+  "mcp": {
+    "available": false,
+    "servers": [],
+    "note": "No MCP server is provided by this site."
+  },
+  "contact": {
+    "type": "professional inquiries",
+    "email": "jonathan.haas@gmail.com",
+    "url": "https://jonathan.jawnhaas.xyz/contact/"
+  }
+}

@@ -20,6 +20,11 @@ Jonathan leads hosting, deployments, accessibility and development standards for
 ## Profiles
 
 - [Website](https://jonathan.jawnhaas.xyz/)
+- [Homepage in Markdown](https://jonathan.jawnhaas.xyz/index.md)
+- [About in Markdown](https://jonathan.jawnhaas.xyz/about.md)
+- [Contact in Markdown](https://jonathan.jawnhaas.xyz/contact.md)
+- [Privacy in Markdown](https://jonathan.jawnhaas.xyz/privacy.md)
+- [Structured agent view](https://jonathan.jawnhaas.xyz/?mode=agent)
 - [LinkedIn](https://www.linkedin.com/in/jonathan-haas-8728328/)
 - [GitHub](https://github.com/JonathanHaas)
 - [Instagram](https://www.instagram.com/jawnhaas/)

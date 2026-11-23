@@ -9,8 +9,17 @@ const root = new URL("../", import.meta.url);
 const read = (f) => readFileSync(new URL(f, root), "utf8");
 const assets = {
   "/": ["index.html", "text/html"],
+  "/favicon.svg": ["favicon.svg", "image/svg+xml"],
+  "/qr-code.svg": ["qr-code.svg", "image/svg+xml"],
   "/index.md": ["index.md", "text/markdown"],
+  "/agent.json": ["agent.json", "application/json"],
+  "/about.md": ["about.md", "text/markdown"],
+  "/contact.md": ["contact.md", "text/markdown"],
+  "/privacy.md": ["privacy.md", "text/markdown"],
   "/llms.txt": ["llms.txt", "text/plain"],
+  "/about/": ["about/index.html", "text/html"],
+  "/contact/": ["contact/index.html", "text/html"],
+  "/privacy/": ["privacy/index.html", "text/html"],
   "/partials/footer.html": ["partials/footer.html", "text/html"],
 };
 
@@ -35,12 +44,33 @@ test("homepage returns Markdown for Accept: text/markdown", async () => {
   assert.ok(body.startsWith("# L. Jonathan Haas"));
 });
 
+test("agent mode returns a structured machine-readable view", async () => {
+  const r = await call("/?mode=agent", "text/html");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^application\/json/);
+  const data = await r.json();
+  assert.equal(data.mode, "agent");
+  assert.equal(data.authentication.required, false);
+  assert.equal(data.api.available, false);
+  assert.ok(data.capabilities.length >= 3);
+  assert.equal(data.endpoints.markdown_home.media_type, "text/markdown");
+});
+
 test("homepage still returns HTML for browsers", async () => {
   const r = await call("/", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
   assert.equal(r.status, 200);
   assert.match(r.headers.get("Content-Type"), /^text\/html/);
   assert.match(r.headers.get("Vary"), /Accept/);
-  assert.match(await r.text(), /^<!DOCTYPE html>/);
+  const html = await r.text();
+  assert.match(html, /^<!DOCTYPE html>/);
+  assert.match(html, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml">/);
+  assert.match(html, /<a class="qr" href="https:\/\/jonathan\.jawnhaas\.xyz\/" aria-label="Open jonathan\.jawnhaas\.xyz on your phone">/);
+  assert.match(html, /<img src="\/qr-code\.svg" width="88" height="88" alt="">/);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(html, /<meta name="twitter:title" content="L\. Jonathan Haas · Director of Web Development at Penn">/);
+  assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/jonathan\.jawnhaas\.xyz\/og-image\.png">/);
+  assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
 });
 
 test("homepage returns HTML with no Accept or */*", async () => {
@@ -48,6 +78,59 @@ test("homepage returns HTML with no Accept or */*", async () => {
     const r = await call("/", accept);
     assert.match(r.headers.get("Content-Type"), /^text\/html/);
   }
+});
+
+test("homepage JSON-LD includes a contactable Organization with an address", async () => {
+  const html = read("index.html");
+  const source = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(source, "JSON-LD script is present");
+  const data = JSON.parse(source);
+  const organization = data["@graph"].find((node) => node["@type"] === "Organization");
+  assert.ok(organization, "Organization node is present");
+  assert.equal(organization.address["@type"], "PostalAddress");
+  assert.equal(organization.address.addressLocality, "Philadelphia");
+  assert.equal(organization.contactPoint["@type"], "ContactPoint");
+  assert.equal(organization.contactPoint.contactType, "professional inquiries");
+  assert.match(organization.contactPoint.email, /@/);
+});
+
+test("about, contact, and privacy pages are substantive HTML pages", async () => {
+  for (const route of ["about", "contact", "privacy"]) {
+    const r = await call(`/${route}/`, "text/html");
+    assert.equal(r.status, 200);
+    assert.match(r.headers.get("Content-Type"), /^text\/html/);
+    const html = await r.text();
+    const visibleText = html
+      .replace(/<style[\s\S]*?<\/style>/gi, "")
+      .replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    assert.ok(visibleText.length >= 500, `${route} page has at least 500 visible characters`);
+  }
+});
+
+test("each content page has a Markdown twin", async () => {
+  for (const route of ["about", "contact", "privacy"]) {
+    const r = await call(`/${route}.md`, "text/markdown");
+    assert.equal(r.status, 200);
+    assert.match(r.headers.get("Content-Type"), /^text\/markdown/);
+    assert.match(await r.text(), /^# /);
+  }
+});
+
+test("favicon is available as SVG", async () => {
+  const r = await call("/favicon.svg", "image/svg+xml");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^image\/svg\+xml/);
+  assert.match(await r.text(), /^<svg/);
+});
+
+test("QR code is available as SVG", async () => {
+  const r = await call("/qr-code.svg", "image/svg+xml");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^image\/svg\+xml/);
+  assert.match(await r.text(), /<svg[^>]+viewBox="0 0 37 37"/);
 });
 
 test("missing page returns a Markdown 404 for agents", async () => {
@@ -108,6 +191,15 @@ test("shared footer is filled in on the homepage", async () => {
   assert.equal(html.match(/<footer/g).length, 1);
 });
 
+test("subpages get the same footer as the homepage", async () => {
+  const footer = read("partials/footer.html").trim();
+  for (const path of ["/about/", "/contact/", "/privacy/"]) {
+    const html = await (await call(path, "text/html")).text();
+    assert.ok(html.includes(footer), path);
+    assert.doesNotMatch(html, /include:footer/, path);
+  }
+});
+
 test("the 404 page gets the same footer as the homepage", async () => {
   const footer = read("partials/footer.html").trim();
   const home = await (await call("/", "text/html")).text();
@@ -124,7 +216,7 @@ test("Markdown responses don't get the HTML footer", async () => {
 });
 
 test("every HTML page uses the footer include, not its own footer", () => {
-  for (const f of ["index.html", "404.html"]) {
+  for (const f of ["index.html", "404.html", "about/index.html", "contact/index.html", "privacy/index.html"]) {
     const src = read(f);
     assert.match(src, /<!-- include:footer -->/, f);
     assert.doesNotMatch(src, /<footer/, f);
