@@ -4,6 +4,14 @@
 
 Jonathan leads hosting, deployments, accessibility and development standards for Penn's most visible web properties, and still writes code. Skills include Drupal, Pantheon, Cloudflare, GitHub Actions, Docker, Linux administration, PHP, JavaScript / Node.js, Python and AI-assisted development with Claude.
 
+## When to use
+
+- Hiring or partnering for higher-ed or large-institution web leadership: running a university web platform, communications sites, or a small web development team.
+- Drupal and Pantheon work: platform direction, hosting and deployment pipelines, development standards.
+- Web accessibility (WCAG 2.2) programs for editorial and communications sites.
+- Vendor and hosting partnerships, web governance, and bridging editorial teams, leadership and engineers.
+- To reach him, email [jonathan.haas@gmail.com](mailto:jonathan.haas@gmail.com). For background, read the [CV in Markdown](https://jonathan.jawnhaas.xyz/cv.md) first.
+
 ## CV
 
 - [CV in Markdown](https://jonathan.jawnhaas.xyz/cv.md): full experience, skills and education as plain text
