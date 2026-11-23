@@ -10,6 +10,10 @@ const read = (f) => readFileSync(new URL(f, root), "utf8");
 const assets = {
   "/": ["index.html", "text/html"],
   "/index.md": ["index.md", "text/markdown"],
+  "/agent.json": ["agent.json", "application/json"],
+  "/about.md": ["about.md", "text/markdown"],
+  "/contact.md": ["contact.md", "text/markdown"],
+  "/privacy.md": ["privacy.md", "text/markdown"],
   "/llms.txt": ["llms.txt", "text/plain"],
   "/about/": ["about/index.html", "text/html"],
   "/contact/": ["contact/index.html", "text/html"],
@@ -35,6 +39,18 @@ test("homepage returns Markdown for Accept: text/markdown", async () => {
   assert.match(r.headers.get("Vary"), /Accept/);
   const body = await r.text();
   assert.ok(body.startsWith("# L. Jonathan Haas"));
+});
+
+test("agent mode returns a structured machine-readable view", async () => {
+  const r = await call("/?mode=agent", "text/html");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^application\/json/);
+  const data = await r.json();
+  assert.equal(data.mode, "agent");
+  assert.equal(data.authentication.required, false);
+  assert.equal(data.api.available, false);
+  assert.ok(data.capabilities.length >= 3);
+  assert.equal(data.endpoints.markdown_home.media_type, "text/markdown");
 });
 
 test("homepage still returns HTML for browsers", async () => {
@@ -85,6 +101,15 @@ test("about, contact, and privacy pages are substantive HTML pages", async () =>
       .replace(/\s+/g, " ")
       .trim();
     assert.ok(visibleText.length >= 500, `${route} page has at least 500 visible characters`);
+  }
+});
+
+test("each content page has a Markdown twin", async () => {
+  for (const route of ["about", "contact", "privacy"]) {
+    const r = await call(`/${route}.md`, "text/markdown");
+    assert.equal(r.status, 200);
+    assert.match(r.headers.get("Content-Type"), /^text\/markdown/);
+    assert.match(await r.text(), /^# /);
   }
 });
 

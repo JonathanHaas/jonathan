@@ -10,3 +10,15 @@
 
 /index.md
   Content-Type: text/markdown; charset=utf-8
+
+/about.md
+  Content-Type: text/markdown; charset=utf-8
+
+/contact.md
+  Content-Type: text/markdown; charset=utf-8
+
+/privacy.md
+  Content-Type: text/markdown; charset=utf-8
+
+/agent.json
+  Content-Type: application/json; charset=utf-8

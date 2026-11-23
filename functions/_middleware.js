@@ -1,9 +1,11 @@
 // Content negotiation for agents (Cloudflare Pages Functions).
 // - GET / with Accept preferring text/markdown returns index.md as text/markdown.
+// - GET /?mode=agent returns a structured JSON description for agents.
 // - Any 404 requested with Accept preferring text/markdown returns a short Markdown error.
 // - Browsers (Accept: text/html) get the normal static site, unchanged.
 
 const MARKDOWN = "text/markdown; charset=utf-8";
+const JSON_TYPE = "application/json; charset=utf-8";
 
 const NOT_FOUND_MD = `# 404: page not found
 
@@ -66,11 +68,20 @@ export async function onRequest(context) {
   const wantsMarkdown = prefersMarkdown(request.headers.get("Accept"));
   const isHome = url.pathname === "/" || url.pathname === "/index.html";
 
+  if (isHome && url.searchParams.get("mode") === "agent") {
+    const asset = await env.ASSETS.fetch(new URL("/agent.json", url));
+    if (asset.ok) {
+      return new Response(method === "HEAD" ? null : asset.body, {
+        status: 200,
+        headers: { "Content-Type": JSON_TYPE, "Cache-Control": "no-cache" },
+      });
+    }
+  }
+
   if (isHome && wantsMarkdown) {
     const asset = await env.ASSETS.fetch(new URL("/index.md", url));
     if (asset.ok) {
-      const body = method === "HEAD" ? null : await asset.text();
-      return new Response(body, {
+      return new Response(method === "HEAD" ? null : asset.body, {
         status: 200,
         headers: { "Content-Type": MARKDOWN, Vary: "Accept", "Cache-Control": "no-cache" },
       });
