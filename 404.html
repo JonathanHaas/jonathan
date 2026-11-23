@@ -12,7 +12,8 @@
   --display: "Jost", "Futura", "Century Gothic", system-ui, sans-serif; --body: "Karla", "Helvetica Neue", Arial, sans-serif; color-scheme: light; }
 html, body { margin: 0; }
 body { background: var(--oat); color: var(--ink); font: 400 1.0625rem/1.65 var(--body); }
-main { max-width: 880px; margin: 0 auto; padding: 72px 24px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+main { padding: 72px 0 24px; }
 h1 { font: 500 clamp(2.2rem, 5vw, 3.2rem)/1.05 var(--display); color: var(--walnut-dark); margin: 0 0 16px; }
 p { margin: 0 0 12px; color: var(--muted); }
 a { color: var(--walnut); text-decoration-color: var(--brass); text-underline-offset: 3px; }
@@ -20,10 +21,13 @@ a:focus-visible { outline: 2px solid var(--walnut); outline-offset: 3px; border-
 </style>
 </head>
 <body>
+<div class="wrap">
 <main>
   <h1>Page not found</h1>
   <p>There's nothing at this address.</p>
   <p><a href="/">Go to the homepage</a></p>
 </main>
+<!-- include:footer -->
+</div>
 </body>
 </html>

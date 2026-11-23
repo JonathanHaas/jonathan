@@ -7,7 +7,12 @@ import { onRequest, prefersMarkdown } from "../functions/_middleware.js";
 
 const root = new URL("../", import.meta.url);
 const read = (f) => readFileSync(new URL(f, root), "utf8");
-const assets = { "/": ["index.html", "text/html"], "/index.md": ["index.md", "text/markdown"], "/llms.txt": ["llms.txt", "text/plain"] };
+const assets = {
+  "/": ["index.html", "text/html"],
+  "/index.md": ["index.md", "text/markdown"],
+  "/llms.txt": ["llms.txt", "text/plain"],
+  "/partials/footer.html": ["partials/footer.html", "text/html"],
+};
 
 // Stand-in for Cloudflare Pages static serving: known files return 200, anything else 404.html with 404.
 function serve(url) {
@@ -93,4 +98,35 @@ test("Worker entry gives the same answers as the Pages middleware", async () => 
   const missing = await worker.fetch(new Request("https://jonathan.jawnhaas.xyz/nope", { headers: { Accept: "text/markdown" } }), env);
   assert.equal(missing.status, 404);
   assert.match(await missing.text(), /404: page not found/);
+});
+
+test("shared footer is filled in on the homepage", async () => {
+  const html = await (await call("/", "text/html")).text();
+  assert.doesNotMatch(html, /include:footer/);
+  assert.match(html, /<footer class="site-footer">/);
+  assert.match(html, /Made in Fishtown, Philadelphia/);
+  assert.equal(html.match(/<footer/g).length, 1);
+});
+
+test("the 404 page gets the same footer as the homepage", async () => {
+  const footer = read("partials/footer.html").trim();
+  const home = await (await call("/", "text/html")).text();
+  const missing = await call("/nope", "text/html");
+  assert.equal(missing.status, 404);
+  const html = await missing.text();
+  assert.doesNotMatch(html, /include:footer/);
+  assert.ok(home.includes(footer) && html.includes(footer));
+});
+
+test("Markdown responses don't get the HTML footer", async () => {
+  const md = await (await call("/", "text/markdown")).text();
+  assert.doesNotMatch(md, /<footer/);
+});
+
+test("every HTML page uses the footer include, not its own footer", () => {
+  for (const f of ["index.html", "404.html"]) {
+    const src = read(f);
+    assert.match(src, /<!-- include:footer -->/, f);
+    assert.doesNotMatch(src, /<footer/, f);
+  }
 });
