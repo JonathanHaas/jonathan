@@ -9,6 +9,7 @@ const root = new URL("../", import.meta.url);
 const read = (f) => readFileSync(new URL(f, root), "utf8");
 const assets = {
   "/": ["index.html", "text/html"],
+  "/favicon.svg": ["favicon.svg", "image/svg+xml"],
   "/index.md": ["index.md", "text/markdown"],
   "/agent.json": ["agent.json", "application/json"],
   "/about.md": ["about.md", "text/markdown"],
@@ -60,6 +61,7 @@ test("homepage still returns HTML for browsers", async () => {
   assert.match(r.headers.get("Vary"), /Accept/);
   const html = await r.text();
   assert.match(html, /^<!DOCTYPE html>/);
+  assert.match(html, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml">/);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   assert.match(html, /<meta name="twitter:title" content="L\. Jonathan Haas · Director of Web Development at Penn">/);
   assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
@@ -111,6 +113,13 @@ test("each content page has a Markdown twin", async () => {
     assert.match(r.headers.get("Content-Type"), /^text\/markdown/);
     assert.match(await r.text(), /^# /);
   }
+});
+
+test("favicon is available as SVG", async () => {
+  const r = await call("/favicon.svg", "image/svg+xml");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^image\/svg\+xml/);
+  assert.match(await r.text(), /^<svg/);
 });
 
 test("missing page returns a Markdown 404 for agents", async () => {
