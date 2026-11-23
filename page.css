@@ -1,0 +1,44 @@
+:root {
+  --oat: #efe9df;
+  --linen: #f7f3ec;
+  --walnut: #5b3a24;
+  --walnut-dark: #3b2517;
+  --moss: #5f6b45;
+  --brass: #b08a3e;
+  --ink: #2a221c;
+  --muted: #6e6258;
+  --rule: #d9cfc0;
+  --display: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --body: "Karla", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--oat);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(91,58,36,.035) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(90deg, rgba(91,58,36,.03) 0 2px, transparent 2px 6px);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--body);
+}
+a { color: var(--walnut); text-decoration-color: var(--brass); text-underline-offset: 3px; }
+a:hover { color: var(--moss); }
+a:focus-visible { outline: 2px solid var(--walnut); outline-offset: 3px; border-radius: 2px; }
+.skip { position: absolute; left: 16px; top: -60px; padding: 10px 16px; background: var(--walnut); color: var(--linen); }
+.skip:focus { top: 12px; }
+.wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--rule); }
+.mark { margin: 0; font: 600 1.35rem var(--display); letter-spacing: .12em; text-transform: uppercase; }
+.mark a { color: var(--walnut-dark); text-decoration: none; }
+nav { display: flex; gap: 18px; flex-wrap: wrap; }
+nav a { font: 500 .95rem var(--display); color: var(--muted); text-decoration: none; }
+main { padding: 56px 0 72px; }
+h1 { margin: 0 0 20px; color: var(--walnut-dark); font: 500 clamp(2.5rem, 7vw, 4rem)/1.05 var(--display); }
+h2 { margin: 42px 0 12px; color: var(--moss); font: 500 1.05rem var(--display); letter-spacing: .12em; text-transform: uppercase; }
+p { max-width: 67ch; margin: 0 0 18px; }
+.lede { color: var(--muted); font-size: 1.2rem; }
+.card { margin: 28px 0; padding: 24px; background: var(--linen); border: 1px solid var(--rule); border-left: 6px solid var(--walnut); border-radius: 4px; }
+.card p:last-child { margin-bottom: 0; }
+footer { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 28px 0 42px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+@media (max-width: 620px) { header { align-items: flex-start; flex-direction: column; } main { padding-top: 40px; } }

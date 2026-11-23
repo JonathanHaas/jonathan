@@ -7,7 +7,14 @@ import { onRequest, prefersMarkdown } from "../functions/_middleware.js";
 
 const root = new URL("../", import.meta.url);
 const read = (f) => readFileSync(new URL(f, root), "utf8");
-const assets = { "/": ["index.html", "text/html"], "/index.md": ["index.md", "text/markdown"], "/llms.txt": ["llms.txt", "text/plain"] };
+const assets = {
+  "/": ["index.html", "text/html"],
+  "/index.md": ["index.md", "text/markdown"],
+  "/llms.txt": ["llms.txt", "text/plain"],
+  "/about/": ["about/index.html", "text/html"],
+  "/contact/": ["contact/index.html", "text/html"],
+  "/privacy/": ["privacy/index.html", "text/html"],
+};
 
 // Stand-in for Cloudflare Pages static serving: known files return 200, anything else 404.html with 404.
 function serve(url) {
@@ -35,13 +42,49 @@ test("homepage still returns HTML for browsers", async () => {
   assert.equal(r.status, 200);
   assert.match(r.headers.get("Content-Type"), /^text\/html/);
   assert.match(r.headers.get("Vary"), /Accept/);
-  assert.match(await r.text(), /^<!DOCTYPE html>/);
+  const html = await r.text();
+  assert.match(html, /^<!DOCTYPE html>/);
+  assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(html, /<meta name="twitter:title" content="L\. Jonathan Haas · Director of Web Development at Penn">/);
+  assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/jonathan\.jawnhaas\.xyz\/og-image\.png">/);
+  assert.match(html, /<meta name="twitter:image:alt" content="[^"]+">/);
 });
 
 test("homepage returns HTML with no Accept or */*", async () => {
   for (const accept of [undefined, "*/*"]) {
     const r = await call("/", accept);
     assert.match(r.headers.get("Content-Type"), /^text\/html/);
+  }
+});
+
+test("homepage JSON-LD includes a contactable Organization with an address", async () => {
+  const html = read("index.html");
+  const source = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(source, "JSON-LD script is present");
+  const data = JSON.parse(source);
+  const organization = data["@graph"].find((node) => node["@type"] === "Organization");
+  assert.ok(organization, "Organization node is present");
+  assert.equal(organization.address["@type"], "PostalAddress");
+  assert.equal(organization.address.addressLocality, "Philadelphia");
+  assert.equal(organization.contactPoint["@type"], "ContactPoint");
+  assert.equal(organization.contactPoint.contactType, "professional inquiries");
+  assert.match(organization.contactPoint.email, /@/);
+});
+
+test("about, contact, and privacy pages are substantive HTML pages", async () => {
+  for (const route of ["about", "contact", "privacy"]) {
+    const r = await call(`/${route}/`, "text/html");
+    assert.equal(r.status, 200);
+    assert.match(r.headers.get("Content-Type"), /^text\/html/);
+    const html = await r.text();
+    const visibleText = html
+      .replace(/<style[\s\S]*?<\/style>/gi, "")
+      .replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    assert.ok(visibleText.length >= 500, `${route} page has at least 500 visible characters`);
   }
 });
 
