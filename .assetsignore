@@ -1,0 +1,7 @@
+# Keep code, config and tests out of the public static assets (Workers).
+.git
+.assetsignore
+wrangler.jsonc
+src
+functions
+tests

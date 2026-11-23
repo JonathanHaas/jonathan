@@ -83,3 +83,14 @@ test("Accept parsing respects q-values", () => {
   assert.equal(prefersMarkdown("*/*"), false);
   assert.equal(prefersMarkdown(""), false);
 });
+
+test("Worker entry gives the same answers as the Pages middleware", async () => {
+  const { default: worker } = await import("../src/worker.js");
+  const env = { ASSETS: { fetch: (r) => serve(typeof r === "string" || r instanceof URL ? String(r) : r.url) } };
+  const md = await worker.fetch(new Request("https://jonathan.jawnhaas.xyz/", { headers: { Accept: "text/markdown" } }), env);
+  assert.match(md.headers.get("Content-Type"), /^text\/markdown/);
+  assert.match(md.headers.get("Vary"), /Accept/);
+  const missing = await worker.fetch(new Request("https://jonathan.jawnhaas.xyz/nope", { headers: { Accept: "text/markdown" } }), env);
+  assert.equal(missing.status, 404);
+  assert.match(await missing.text(), /404: page not found/);
+});
