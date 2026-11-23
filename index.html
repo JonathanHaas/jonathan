@@ -131,6 +131,8 @@ h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
 .contact a { color: var(--linen); text-decoration-color: var(--brass); font: 500 1.05rem var(--display); }
 .contact a:hover { color: #efe8d6; }
 .contact a:focus-visible { outline-color: var(--linen); }
+.contact .qr { display: grid; grid-template-columns: 88px minmax(0, 10ch); gap: 12px; align-items: center; margin-top: 8px; text-decoration: none; font-size: .9rem; line-height: 1.25; }
+.contact .qr img { width: 88px; height: 88px; border-radius: 4px; }
 footer { padding: 36px 0 44px; color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 @media (max-width: 720px) {
@@ -138,8 +140,12 @@ footer { padding: 36px 0 44px; color: var(--muted); font-size: .9rem; display: f
   .hero { padding: 24px 0 32px; }
     .skills { grid-template-columns: 1fr; }
   .contact { grid-template-columns: 1fr; padding: 30px 24px; }
+  .contact .qr { display: none; }
   .job { padding: 22px 20px; }
   section { padding-top: 52px; }
+}
+@media print {
+  .contact .qr { display: grid; }
 }
 @media (prefers-reduced-motion: no-preference) {
     @keyframes glow { from { opacity: .35; } to { opacity: .6; } }
@@ -333,6 +339,10 @@ footer { padding: 36px 0 44px; color: var(--muted); font-size: .9rem; display: f
       <a href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">Download CV (PDF)</a>
       <a href="https://github.com/JonathanHaas">github.com/JonathanHaas</a>
       <a href="https://www.instagram.com/jawnhaas/">@jawnhaas on Instagram</a>
+      <a class="qr" href="https://jonathan.jawnhaas.xyz/" aria-label="Open jonathan.jawnhaas.xyz on your phone">
+        <img src="/qr-code.svg" width="88" height="88" alt="">
+        <span>Open this site on your phone</span>
+      </a>
     </div>
   </div>
   </main>

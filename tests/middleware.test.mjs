@@ -10,6 +10,7 @@ const read = (f) => readFileSync(new URL(f, root), "utf8");
 const assets = {
   "/": ["index.html", "text/html"],
   "/favicon.svg": ["favicon.svg", "image/svg+xml"],
+  "/qr-code.svg": ["qr-code.svg", "image/svg+xml"],
   "/index.md": ["index.md", "text/markdown"],
   "/agent.json": ["agent.json", "application/json"],
   "/about.md": ["about.md", "text/markdown"],
@@ -62,6 +63,8 @@ test("homepage still returns HTML for browsers", async () => {
   const html = await r.text();
   assert.match(html, /^<!DOCTYPE html>/);
   assert.match(html, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml">/);
+  assert.match(html, /<a class="qr" href="https:\/\/jonathan\.jawnhaas\.xyz\/" aria-label="Open jonathan\.jawnhaas\.xyz on your phone">/);
+  assert.match(html, /<img src="\/qr-code\.svg" width="88" height="88" alt="">/);
   assert.match(html, /<meta name="twitter:card" content="summary_large_image">/);
   assert.match(html, /<meta name="twitter:title" content="L\. Jonathan Haas · Director of Web Development at Penn">/);
   assert.match(html, /<meta name="twitter:description" content="[^"]+">/);
@@ -120,6 +123,13 @@ test("favicon is available as SVG", async () => {
   assert.equal(r.status, 200);
   assert.match(r.headers.get("Content-Type"), /^image\/svg\+xml/);
   assert.match(await r.text(), /^<svg/);
+});
+
+test("QR code is available as SVG", async () => {
+  const r = await call("/qr-code.svg", "image/svg+xml");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^image\/svg\+xml/);
+  assert.match(await r.text(), /<svg[^>]+viewBox="0 0 37 37"/);
 });
 
 test("missing page returns a Markdown 404 for agents", async () => {
