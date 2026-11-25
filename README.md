@@ -71,11 +71,22 @@ Homepage variants set `hasTranslations: true` instead — the layout emits fixed
 | Spanish | `es` | `es` | Jost + Karla | `es_ES` |
 | Mandarin | `zh` | `zh-Hans` | Jost + Karla + Noto Sans SC | `zh_CN` |
 
-Noto Sans SC is added only for `zh` pages — the Google Fonts request is conditional in `base.njk` to avoid loading a large CJK font on English and Spanish pages. The CSS selector `:lang(zh)` applies it to body text; display elements (nav, headings, logo) get a matching `font-family` override.
+Noto Sans SC is added only for `zh` pages — the Google Fonts request is conditional in `base.njk` to avoid loading a large CJK font on English and Spanish pages. `site.css` applies Chinese typography via the CSS `:lang()` pseudo-class rather than a body class:
+
+```css
+:lang(zh) { font-family: "Noto Sans SC", "Karla", …; }
+:lang(zh) .mark, :lang(zh) nav a, :lang(zh) h1 … { font-family: "Noto Sans SC", "Jost", …; }
+```
+
+This keeps all language variants in one stylesheet. No separate CSS file or body-class swap needed for Chinese.
 
 #### What stays in English
 
-Homepages pull from JSON Resume data files (`resume_es.json`, `resume_zh.json`), so job titles and company names stay in English. This is standard practice for multilingual professional resumes — those terms are understood internationally and searching for translated titles is less effective. Interior pages (about, contact, privacy) are fully translated prose.
+Homepages pull from JSON Resume data files (`resume_es.json`, `resume_zh.json`), so job titles and company names stay in English. This is standard practice for multilingual professional resumes — those terms are understood internationally and searching for translated titles is less effective. Interior pages (about, contact, privacy) are fully translated prose. The CV download button on the zh homepage notes the file is in English (`PDF · 英文版`).
+
+#### AI discovery links — English only
+
+The `extraLinks` front matter on the English homepage adds `<link>` tags for `/llms.txt`, `/agent.json`, `/index.md`, and `/resume.json`. These endpoints don't have translated equivalents, so the Spanish and Mandarin homepages omit `extraLinks`.
 
 ### Security headers and CSP
 
