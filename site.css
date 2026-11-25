@@ -113,3 +113,13 @@ footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--m
 }
 @media (max-width: 620px) { .interior main { padding-top: 40px; } }
 @media print { .contact .qr { display: grid; } }
+
+/* Language switcher ------------------------------------------------------ */
+.lang-switch { display: flex; gap: 6px; align-items: center; }
+.lang-switch a { font: 500 .78rem var(--display); color: var(--muted); text-decoration: none; letter-spacing: .08em; padding: 2px 5px; border-radius: 3px; }
+.lang-switch a:hover { color: var(--walnut); }
+.lang-switch a[aria-current] { background: var(--walnut); color: var(--linen); }
+
+/* Chinese font ----------------------------------------------------------- */
+:lang(zh) { font-family: "Noto Sans SC", "Karla", "Helvetica Neue", Arial, sans-serif; }
+:lang(zh) .mark, :lang(zh) nav a, :lang(zh) h1, :lang(zh) h2, :lang(zh) h3, :lang(zh) .cv { font-family: "Noto Sans SC", "Jost", system-ui, sans-serif; }

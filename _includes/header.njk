@@ -1,11 +1,16 @@
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main">{% if lang == "es" %}Saltar al contenido principal{% elif lang == "zh" %}跳转到主要内容{% else %}Skip to main content{% endif %}</a>
 <header class="top">
-  <p class="mark"><a href="/">L. Jonathan Haas</a></p>
-  <nav aria-label="Primary">
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-    <a href="/privacy/">Privacy</a>
+  <p class="mark"><a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">L. Jonathan Haas</a></p>
+  <nav aria-label="{% if lang == 'es' %}Primaria{% elif lang == 'zh' %}主导航{% else %}Primary{% endif %}">
+    <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">{% if lang == "es" %}Inicio{% elif lang == "zh" %}首页{% else %}Home{% endif %}</a>
+    <a href="/about/">{% if lang == "es" %}Acerca de{% elif lang == "zh" %}关于{% else %}About{% endif %}</a>
+    <a href="/contact/">{% if lang == "es" %}Contacto{% elif lang == "zh" %}联系{% else %}Contact{% endif %}</a>
+    <a href="/privacy/">{% if lang == "es" %}Privacidad{% elif lang == "zh" %}隐私{% else %}Privacy{% endif %}</a>
     <a href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">CV</a>
+  </nav>
+  <nav class="lang-switch" aria-label="Language / Idioma / 语言">
+    <a href="/" hreflang="en" {% if lang == "en" %}aria-current="true"{% endif %}>EN</a>
+    <a href="/es/" hreflang="es" {% if lang == "es" %}aria-current="true"{% endif %}>ES</a>
+    <a href="/zh/" hreflang="zh-Hans" {% if lang == "zh" %}aria-current="true"{% endif %}>中文</a>
   </nav>
 </header>

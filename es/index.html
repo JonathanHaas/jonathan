@@ -1,0 +1,124 @@
+---
+lang: es
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L. Jonathan Haas · Director de Desarrollo Web en Penn</title>
+<meta name="description" content="L. Jonathan Haas — Director, Web Development, University Communications, Universidad de Pensilvania.">
+<meta name="author" content="L. Jonathan Haas">
+<meta name="keywords" content="L. Jonathan Haas, Jonathan Haas, Universidad de Pensilvania, University of Pennsylvania, University Communications, Penn Today, desarrollo web, Drupal, Pantheon, Cloudflare, accesibilidad, WCAG 2.2, DevOps, Docker, administración Linux">
+<link rel="canonical" href="https://jonathan.jawnhaas.xyz/es/">
+<meta name="theme-color" content="#5f6b45">
+<link rel="alternate" hreflang="en" href="https://jonathan.jawnhaas.xyz/">
+<link rel="alternate" hreflang="es" href="https://jonathan.jawnhaas.xyz/es/">
+<link rel="alternate" hreflang="zh-Hans" href="https://jonathan.jawnhaas.xyz/zh/">
+<link rel="alternate" hreflang="x-default" href="https://jonathan.jawnhaas.xyz/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<!-- Social sharing (Open Graph) -->
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="L. Jonathan Haas">
+<meta property="og:title" content="L. Jonathan Haas · Director de Desarrollo Web en Penn">
+<meta property="og:description" content="Dirijo el desarrollo web para University Communications en la Universidad de Pensilvania. Veinticinco años en tecnología, trece en Penn.">
+<meta property="og:url" content="https://jonathan.jawnhaas.xyz/es/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://jonathan.jawnhaas.xyz/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1732">
+<meta property="og:image:height" content="908">
+<meta property="og:image:alt" content="L. Jonathan Haas. Hola, soy Jonathan. Plataformas web. Equipos digitales. jonathan.jawnhaas.xyz">
+<meta property="profile:first_name" content="Jonathan">
+<meta property="profile:last_name" content="Haas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body class="home">
+<div class="wrap">
+  {% set lang = "es" %}
+  {% include "header.njk" %}
+
+  <main id="main" tabindex="-1">
+  <div class="hero">
+    <div>
+      <h1>Hola, soy Jonathan.</h1>
+      <p class="lede">Dirijo el desarrollo web para University Communications en la Universidad de Pensilvania. Veinticinco años en tecnología, trece en Penn, y sigo siendo la persona que prefiere arreglar el servidor antes que programar una reunión para hablar de ello.</p>
+      <a class="cv" href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">Descargar CV <small>PDF · en inglés</small></a>
+    </div>
+  </div>
+
+  <section class="about" id="about" aria-labelledby="heading-about">
+    <h2 id="heading-about">Acerca de</h2>
+    <p>Comencé en Penn como desarrollador senior en 2013 y ahora dirijo el desarrollo web en University Communications. Gestiono el lado de comunicaciones de los sitios web de Penn, desde Penn Today y el sitio institucional principal hasta los sitios bajo el Centro del Presidente.</p>
+    <p>Mi trabajo combina estrategia con fontanería digital: alojamiento, despliegues, accesibilidad y traducir entre equipos editoriales, liderazgo e ingenieros. Sigo escribiendo código, porque eso es la parte divertida.</p>
+  </section>
+
+  <section id="experience" aria-labelledby="heading-experience">
+    <h2 id="heading-experience">Experiencia</h2>
+    <article class="job">
+      <div class="job-head">
+        <h3>{{ cv_es.main.name }}</h3>
+        <span class="dates">{{ cv_es.main.city }} · {{ cv_es.main.dates }}</span>
+      </div>
+      <ul class="ladder">
+        {%- for role in cv_es.main.roles %}
+        <li{% if role.current %} class="now"{% endif %}><span>{{ role.position }}</span><span class="dates">{{ role.dates }}</span></li>
+        {%- endfor %}
+      </ul>
+      <ul class="pts">
+        {%- for point in cv_es.main.highlights %}
+        <li>{{ point }}</li>
+        {%- endfor %}
+      </ul>
+    </article>
+
+    <ul class="earlier" aria-label="Experiencia anterior">
+      {%- for job in cv_es.earlier %}
+      <li><span><b>{{ job.name }}</b> · {{ job.position }}</span><span class="dates">{{ job.dates }}</span></li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section id="skills" aria-labelledby="heading-skills">
+    <h2 id="heading-skills">Habilidades</h2>
+    <div class="skills">
+      {%- for skill in cv_es.skills %}
+      <div class="skill"><h3>{{ skill.name }}</h3><p>{{ skill.text }}</p></div>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <section id="education" aria-labelledby="heading-education">
+    <h2 id="heading-education">Formación</h2>
+    {%- for school in cv_es.education %}
+    <div class="edu"><h3>{{ school.title }}, {{ school.institution }}</h3><span class="dates">{{ school.dates }}</span></div>
+    {%- endfor %}
+  </section>
+
+  <div class="contact" id="contact">
+    <div>
+      <h2>Contáctame</h2>
+      <p>Encantado de conversar sobre plataformas web, equipos digitales, o dónde conseguir un buen sándwich en Fishtown.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:jonathan.haas@gmail.com">jonathan.haas@gmail.com</a>
+      <a href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">Descargar CV (PDF, en inglés)</a>
+      <a href="https://github.com/JonathanHaas">github.com/JonathanHaas</a>
+      <a href="https://www.instagram.com/jawnhaas/">@jawnhaas en Instagram</a>
+      <a class="qr" href="https://jonathan.jawnhaas.xyz/es/" aria-label="Abrir jonathan.jawnhaas.xyz en tu teléfono">
+        <img src="/qr-code.svg" width="88" height="88" alt="">
+        <span>Abrir este sitio en tu teléfono</span>
+      </a>
+    </div>
+  </div>
+  </main>
+
+  {% include "footer.njk" %}
+</div>
+</body>
+</html>

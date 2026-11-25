@@ -1,0 +1,131 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "L. Jonathan Haas",
+    "label": "Director, Web Development, University Communications",
+    "email": "jonathan.haas@gmail.com",
+    "url": "https://jonathan.jawnhaas.xyz/",
+    "summary": "Líder de desarrollo web con 25 años en tecnología, incluidos 13 en la Universidad de Pensilvania, donde he crecido de desarrollador senior a director en University Communications. Gestiono el lado de comunicaciones de los sitios web de Penn, incluidos los sitios bajo el Centro del Presidente, y soy responsable de la estrategia, infraestructura y operación diaria de las propiedades web más visibles de la universidad, sirviendo de puente entre los equipos editoriales, el liderazgo y la ingeniería sin dejar de estar en contacto directo con la tecnología.",
+    "location": {
+      "city": "Philadelphia",
+      "region": "PA",
+      "countryCode": "US"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "jonathan-haas-8728328",
+        "url": "https://www.linkedin.com/in/jonathan-haas-8728328/"
+      },
+      {
+        "network": "GitHub",
+        "username": "JonathanHaas",
+        "url": "https://github.com/JonathanHaas"
+      },
+      {
+        "network": "Instagram",
+        "username": "jawnhaas",
+        "url": "https://www.instagram.com/jawnhaas/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "University of Pennsylvania",
+      "location": "Philadelphia, PA",
+      "url": "https://www.upenn.edu/",
+      "position": "Director, Web Development, University Communications",
+      "startDate": "2022",
+      "highlights": [
+        "Gestiono el lado de comunicaciones de los sitios web de Penn, incluidos los que dependen del Centro del Presidente.",
+        "Lidero la plataforma web de Penn Today, el sitio institucional principal y una cartera de sitios de escuelas y oficinas ejecutivas.",
+        "Establezco la dirección técnica en alojamiento, despliegue y estándares de desarrollo, incluida la migración a Drupal moderno en la nube gestionada.",
+        "Desarrollé y fortaleció las prácticas del equipo en accesibilidad, documentación y entrega de proyectos.",
+        "Soy el representante de la universidad en las relaciones con proveedores de alojamiento y en la gobernanza web con el liderazgo de comunicaciones."
+      ]
+    },
+    {
+      "name": "University of Pennsylvania",
+      "location": "Philadelphia, PA",
+      "url": "https://www.upenn.edu/",
+      "position": "Web Development Manager",
+      "startDate": "2016",
+      "endDate": "2022"
+    },
+    {
+      "name": "University of Pennsylvania",
+      "location": "Philadelphia, PA",
+      "url": "https://www.upenn.edu/",
+      "position": "Senior Web Developer",
+      "startDate": "2013",
+      "endDate": "2016"
+    },
+    {
+      "name": "GSI Commerce / eBay",
+      "position": "Senior Software Engineer",
+      "startDate": "2012",
+      "endDate": "2013"
+    },
+    {
+      "name": "Galaxy Systems",
+      "position": "Software Engineer",
+      "startDate": "2011",
+      "endDate": "2012"
+    },
+    {
+      "name": "GlobalFit",
+      "position": "Software Engineer",
+      "startDate": "2007",
+      "endDate": "2010"
+    },
+    {
+      "name": "GSI Commerce",
+      "position": "Software Engineer",
+      "startDate": "2000",
+      "endDate": "2006"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Drexel University",
+      "area": "Information Systems",
+      "startDate": "1995",
+      "endDate": "2000"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Plataformas web",
+      "keywords": ["Drupal", "Pantheon", "Composer", "Lando", "Cloudflare infrastructure", "accessibility (WCAG 2.2)"]
+    },
+    {
+      "name": "DevOps",
+      "keywords": ["GitHub Actions", "Git", "Docker", "Linux administration", "DNS", "Cloudflare Zero Trust", "Tailscale"]
+    },
+    {
+      "name": "Lenguajes",
+      "keywords": ["PHP", "Java", "JavaScript / Node.js", "Python", "HTML/CSS"]
+    },
+    {
+      "name": "Liderazgo",
+      "keywords": ["Vendor partnerships", "technical documentation", "Jira", "Confluence"]
+    },
+    {
+      "name": "IA",
+      "keywords": ["Claude (Code, Projects, MCP)", "GitHub Copilot", "AI agents for infrastructure ops", "AI-assisted development with human code review"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Self-hosted homelab and personal web builds",
+      "description": "Homelab autogestionado (Docker, Cloudflare Zero Trust, Tailscale, Linux) y proyectos web personales en Node.js e infraestructura de Cloudflare.",
+      "url": "https://github.com/JonathanHaas",
+      "keywords": ["Docker", "Cloudflare Zero Trust", "Tailscale", "Linux", "Node.js", "Cloudflare"]
+    }
+  ],
+  "meta": {
+    "canonical": "https://jonathan.jawnhaas.xyz/resume.json",
+    "version": "v1.0.0",
+    "lastModified": "2026-11-25T00:00:00"
+  }
+}

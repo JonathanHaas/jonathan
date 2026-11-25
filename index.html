@@ -1,3 +1,6 @@
+---
+lang: en
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +11,10 @@
 <meta name="author" content="L. Jonathan Haas">
 <meta name="keywords" content="L. Jonathan Haas, Jonathan Haas, University of Pennsylvania, University Communications, Penn Today, web development, web platforms, Drupal, Pantheon, Cloudflare, accessibility, WCAG 2.2, DevOps, GitHub Actions, Docker, Linux administration, digital teams">
 <link rel="canonical" href="https://jonathan.jawnhaas.xyz/">
+<link rel="alternate" hreflang="en" href="https://jonathan.jawnhaas.xyz/">
+<link rel="alternate" hreflang="es" href="https://jonathan.jawnhaas.xyz/es/">
+<link rel="alternate" hreflang="zh-Hans" href="https://jonathan.jawnhaas.xyz/zh/">
+<link rel="alternate" hreflang="x-default" href="https://jonathan.jawnhaas.xyz/">
 <meta name="theme-color" content="#5f6b45">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <link rel="alternate" type="text/plain" href="/llms.txt" title="For AI agents">
@@ -145,6 +152,7 @@
 </head>
 <body class="home">
 <div class="wrap">
+  {% set lang = "en" %}
   {% include "header.njk" %}
 
   <main id="main" tabindex="-1">

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "L. Jonathan Haas",
+    "label": "Director, Web Development, University Communications",
+    "email": "jonathan.haas@gmail.com",
+    "url": "https://jonathan.jawnhaas.xyz/",
+    "summary": "拥有25年软件行业经验的网络开发负责人，其中13年任职于宾夕法尼亚大学，从高级开发人员成长为University Communications的总监。负责管理宾大传播侧的网站，包括校长中心下属各网站，主导大学最重要的网络资产的战略、基础设施及日常运营，在编辑团队、领导层与工程团队之间搭建沟通桥梁，同时深度参与技术工作。",
+    "location": {
+      "city": "Philadelphia",
+      "region": "PA",
+      "countryCode": "US"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "jonathan-haas-8728328",
+        "url": "https://www.linkedin.com/in/jonathan-haas-8728328/"
+      },
+      {
+        "network": "GitHub",
+        "username": "JonathanHaas",
+        "url": "https://github.com/JonathanHaas"
+      },
+      {
+        "network": "Instagram",
+        "username": "jawnhaas",
+        "url": "https://www.instagram.com/jawnhaas/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "University of Pennsylvania",
+      "location": "Philadelphia, PA",
+      "url": "https://www.upenn.edu/",
+      "position": "Director, Web Development, University Communications",
+      "startDate": "2022",
+      "highlights": [
+        "负责管理宾大传播侧的网站，包括校长中心下属的所有网站。",
+        "主导Penn Today网络平台、大学旗舰网站及各院校和高管办公室网站群的技术工作。",
+        "制定托管、部署和开发标准的技术方向，推动迁移至基于托管云主机的现代Drupal架构。",
+        "建立并完善团队在无障碍访问、文档编写和项目交付方面的工作规范。",
+        "担任大学在托管供应商合作及与传播部门领导层进行网络治理方面的首席负责人。"
+      ]
+    },
+    {
+      "name": "University of Pennsylvania",
+      "location": "Philadelphia, PA",
+      "url": "https://www.upenn.edu/",
+      "position": "Web Development Manager",
+      "startDate": "2016",
+      "endDate": "2022"
+    },
+    {
+      "name": "University of Pennsylvania",
+      "location": "Philadelphia, PA",
+      "url": "https://www.upenn.edu/",
+      "position": "Senior Web Developer",
+      "startDate": "2013",
+      "endDate": "2016"
+    },
+    {
+      "name": "GSI Commerce / eBay",
+      "position": "Senior Software Engineer",
+      "startDate": "2012",
+      "endDate": "2013"
+    },
+    {
+      "name": "Galaxy Systems",
+      "position": "Software Engineer",
+      "startDate": "2011",
+      "endDate": "2012"
+    },
+    {
+      "name": "GlobalFit",
+      "position": "Software Engineer",
+      "startDate": "2007",
+      "endDate": "2010"
+    },
+    {
+      "name": "GSI Commerce",
+      "position": "Software Engineer",
+      "startDate": "2000",
+      "endDate": "2006"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Drexel University",
+      "area": "Information Systems",
+      "startDate": "1995",
+      "endDate": "2000"
+    }
+  ],
+  "skills": [
+    {
+      "name": "网络平台",
+      "keywords": ["Drupal", "Pantheon", "Composer", "Lando", "Cloudflare infrastructure", "accessibility (WCAG 2.2)"]
+    },
+    {
+      "name": "DevOps",
+      "keywords": ["GitHub Actions", "Git", "Docker", "Linux administration", "DNS", "Cloudflare Zero Trust", "Tailscale"]
+    },
+    {
+      "name": "编程语言",
+      "keywords": ["PHP", "Java", "JavaScript / Node.js", "Python", "HTML/CSS"]
+    },
+    {
+      "name": "团队管理",
+      "keywords": ["Vendor partnerships", "technical documentation", "Jira", "Confluence"]
+    },
+    {
+      "name": "人工智能",
+      "keywords": ["Claude (Code, Projects, MCP)", "GitHub Copilot", "AI agents for infrastructure ops", "AI-assisted development with human code review"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Self-hosted homelab and personal web builds",
+      "description": "自托管家庭实验室（Docker、Cloudflare Zero Trust、Tailscale、Linux）及基于Node.js和Cloudflare基础设施的个人网络项目。",
+      "url": "https://github.com/JonathanHaas",
+      "keywords": ["Docker", "Cloudflare Zero Trust", "Tailscale", "Linux", "Node.js", "Cloudflare"]
+    }
+  ],
+  "meta": {
+    "canonical": "https://jonathan.jawnhaas.xyz/resume.json",
+    "version": "v1.0.0",
+    "lastModified": "2026-11-25T00:00:00"
+  }
+}
