@@ -156,14 +156,14 @@
     </div>
   </div>
 
-  <section class="about" id="about">
-    <h2>About</h2>
+  <section class="about" id="about" aria-labelledby="heading-about">
+    <h2 id="heading-about">About</h2>
     <p>I started at Penn as a senior developer in 2013 and now direct web development in University Communications. I manage the communications side of Penn's websites, from Penn Today and the flagship site to the sites that fall under the President's Center.</p>
     <p>My job is part strategy, part plumbing: hosting, deployments, accessibility, and translating between editorial teams, leadership and engineers. I still write code, because that's the fun part.</p>
   </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
+  <section id="experience" aria-labelledby="heading-experience">
+    <h2 id="heading-experience">Experience</h2>
     {#- Built from resume.json (see _data/cv.js and src/resume-view.js). #}
     <article class="job">
       <div class="job-head">
@@ -189,8 +189,8 @@
     </ul>
   </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
+  <section id="skills" aria-labelledby="heading-skills">
+    <h2 id="heading-skills">Skills</h2>
     <div class="skills">
       {%- for skill in cv.skills %}
       <div class="skill"><h3>{{ skill.name }}</h3><p>{{ skill.text }}</p></div>
@@ -198,8 +198,8 @@
     </div>
   </section>
 
-  <section id="education">
-    <h2>Education</h2>
+  <section id="education" aria-labelledby="heading-education">
+    <h2 id="heading-education">Education</h2>
     {%- for school in cv.education %}
     <div class="edu"><h3>{{ school.title }}, {{ school.institution }}</h3><span class="dates">{{ school.dates }}</span></div>
     {%- endfor %}
