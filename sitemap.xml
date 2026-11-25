@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jonathan.jawnhaas.xyz/</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://jonathan.jawnhaas.xyz/about/</loc>
@@ -18,7 +18,11 @@
   </url>
   <url>
     <loc>https://jonathan.jawnhaas.xyz/cv.md</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-25</lastmod>
+  </url>
+  <url>
+    <loc>https://jonathan.jawnhaas.xyz/resume.json</loc>
+    <lastmod>2026-11-25</lastmod>
   </url>
   <url>
     <loc>https://jonathan.jawnhaas.xyz/L-Jonathan-Haas-CV.pdf</loc>

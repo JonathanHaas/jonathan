@@ -15,6 +15,7 @@ Jonathan leads hosting, deployments, accessibility and development standards for
 ## CV
 
 - [CV in Markdown](https://jonathan.jawnhaas.xyz/cv.md): full experience, skills and education as plain text
+- [CV as JSON Resume](https://jonathan.jawnhaas.xyz/resume.json): the same CV as structured data in the JSON Resume schema (jsonresume.org); the site builds its CV sections from this file
 - [CV as PDF](https://jonathan.jawnhaas.xyz/L-Jonathan-Haas-CV.pdf): one-page printable version
 
 ## Profiles

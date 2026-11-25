@@ -4,6 +4,7 @@ export default function (eleventyConfig) {
   const staticFiles = [
     "_headers",
     "agent.json",
+    "resume.json",
     "*.md",
     "*.pdf",
     "*.png",

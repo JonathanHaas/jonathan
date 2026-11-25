@@ -2,7 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { onRequest, prefersMarkdown } from "../functions/_middleware.js";
+import { onRequest, prefersJson, prefersMarkdown } from "../functions/_middleware.js";
 
 const projectRoot = new URL("../", import.meta.url);
 const outputRoot = new URL("../dist/", import.meta.url);
@@ -14,6 +14,7 @@ const assets = {
   "/qr-code.svg": ["qr-code.svg", "image/svg+xml"],
   "/index.md": ["index.md", "text/markdown"],
   "/agent.json": ["agent.json", "application/json"],
+  "/resume.json": ["resume.json", "application/json"],
   "/about.md": ["about.md", "text/markdown"],
   "/contact.md": ["contact.md", "text/markdown"],
   "/privacy.md": ["privacy.md", "text/markdown"],
@@ -161,6 +162,52 @@ test("HEAD on homepage with Markdown has headers and no body", async () => {
   assert.equal(r.status, 200);
   assert.match(r.headers.get("Content-Type"), /^text\/markdown/);
   assert.equal(await r.text(), "");
+});
+
+test("/resume.json is JSON with CORS open for reads", async () => {
+  const r = await call("/resume.json", "*/*");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^application\/json/);
+  assert.equal(r.headers.get("Access-Control-Allow-Origin"), "*");
+  assert.match(r.headers.get("Link"), /jsonresume\.org\/schema/);
+  const data = await r.json();
+  assert.equal(data.basics.name, "L. Jonathan Haas");
+});
+
+test("homepage returns resume.json for Accept: application/json", async () => {
+  const r = await call("/", "application/json");
+  assert.equal(r.status, 200);
+  assert.match(r.headers.get("Content-Type"), /^application\/json/);
+  assert.match(r.headers.get("Vary"), /Accept/);
+  assert.equal(r.headers.get("Content-Location"), "/resume.json");
+  assert.equal(r.headers.get("Access-Control-Allow-Origin"), "*");
+  const data = await r.json();
+  assert.ok(Array.isArray(data.work));
+});
+
+test("HEAD on homepage with JSON has headers and no body", async () => {
+  const r = await call("/", "application/json", "HEAD");
+  assert.match(r.headers.get("Content-Type"), /^application\/json/);
+  assert.equal(await r.text(), "");
+});
+
+test("JSON negotiation leaves browsers, Markdown and agent mode alone", async () => {
+  const browser = await call("/", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+  assert.match(browser.headers.get("Content-Type"), /^text\/html/);
+  const md = await call("/", "text/markdown, application/json");
+  assert.match(md.headers.get("Content-Type"), /^text\/markdown/);
+  const agent = await (await call("/?mode=agent", "application/json")).json();
+  assert.equal(agent.mode, "agent");
+  const other = await call("/about/", "application/json");
+  assert.match(other.headers.get("Content-Type"), /^text\/html/);
+});
+
+test("Accept parsing for JSON respects q-values", () => {
+  assert.equal(prefersJson("application/json"), true);
+  assert.equal(prefersJson("application/json, text/html;q=0.5"), true);
+  assert.equal(prefersJson("text/html, application/json;q=0.9"), false);
+  assert.equal(prefersJson("application/json;q=0"), false);
+  assert.equal(prefersJson("*/*"), false);
 });
 
 test("Accept parsing respects q-values", () => {

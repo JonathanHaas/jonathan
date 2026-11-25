@@ -10,6 +10,7 @@
 <link rel="canonical" href="https://jonathan.jawnhaas.xyz/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="text/markdown" href="/index.md" title="Homepage (Markdown)">
+<link rel="alternate" type="application/json" href="/resume.json" title="CV (JSON Resume)">
 <!-- Social sharing (Open Graph: Facebook, LinkedIn) -->
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="L. Jonathan Haas">
@@ -159,47 +160,45 @@
 
   <section id="experience">
     <h2>Experience</h2>
+    {#- Built from resume.json (see _data/cv.js and src/resume-view.js). #}
     <article class="job">
       <div class="job-head">
-        <h3>University of Pennsylvania</h3>
-        <span class="dates">Philadelphia · 2013–Present</span>
+        <h3>{{ cv.main.name }}</h3>
+        <span class="dates">{{ cv.main.city }} · {{ cv.main.dates }}</span>
       </div>
       <ul class="ladder">
-        <li class="now"><span>Director, Web Development, University Communications</span><span class="dates">2022–Present</span></li>
-        <li><span>Web Development Manager</span><span class="dates">2016–2022</span></li>
-        <li><span>Senior Web Developer</span><span class="dates">2013–2016</span></li>
+        {%- for role in cv.main.roles %}
+        <li{% if role.current %} class="now"{% endif %}><span>{{ role.position }}</span><span class="dates">{{ role.dates }}</span></li>
+        {%- endfor %}
       </ul>
       <ul class="pts">
-        <li>Manage the communications side of Penn's websites, including the sites that fall under the President's Center.</li>
-        <li>Lead the web platform behind Penn Today, the university flagship site and a portfolio of school and executive-office sites.</li>
-        <li>Set technical direction across hosting, deployment and development standards, including the move to modern Drupal on managed cloud hosting.</li>
-        <li>Built and grew the team's practices for accessibility, documentation and project delivery.</li>
-        <li>Serve as the university's lead on hosting-vendor partnerships and on web governance with communications leadership.</li>
+        {%- for point in cv.main.highlights %}
+        <li>{{ point }}</li>
+        {%- endfor %}
       </ul>
     </article>
 
     <ul class="earlier" aria-label="Earlier experience">
-      <li><span><b>GSI Commerce / eBay</b> · Senior Software Engineer</span><span class="dates">2012–2013</span></li>
-      <li><span><b>Galaxy Systems</b> · Software Engineer</span><span class="dates">2011–2012</span></li>
-      <li><span><b>GlobalFit</b> · Software Engineer</span><span class="dates">2007–2010</span></li>
-      <li><span><b>GSI Commerce</b> · Software Engineer</span><span class="dates">2000–2006</span></li>
+      {%- for job in cv.earlier %}
+      <li><span><b>{{ job.name }}</b> · {{ job.position }}</span><span class="dates">{{ job.dates }}</span></li>
+      {%- endfor %}
     </ul>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
     <div class="skills">
-      <div class="skill"><h3>Web platforms</h3><p>Drupal, Pantheon, Composer, Lando, Cloudflare infrastructure, accessibility (WCAG 2.2)</p></div>
-      <div class="skill"><h3>DevOps</h3><p>GitHub Actions, Git, Docker, Linux administration, DNS, Cloudflare Zero Trust, Tailscale</p></div>
-      <div class="skill"><h3>Languages</h3><p>PHP, Java, JavaScript / Node.js, Python, HTML/CSS</p></div>
-      <div class="skill"><h3>Leadership</h3><p>Vendor partnerships, technical documentation, Jira, Confluence</p></div>
-      <div class="skill"><h3>AI</h3><p>Claude (Code, Projects, MCP), GitHub Copilot, AI agents for infrastructure ops, AI-assisted development with human code review</p></div>
+      {%- for skill in cv.skills %}
+      <div class="skill"><h3>{{ skill.name }}</h3><p>{{ skill.text }}</p></div>
+      {%- endfor %}
     </div>
   </section>
 
   <section id="education">
     <h2>Education</h2>
-    <div class="edu"><h3>Information Systems, Drexel University</h3><span class="dates">1995–2000</span></div>
+    {%- for school in cv.education %}
+    <div class="edu"><h3>{{ school.title }}, {{ school.institution }}</h3><span class="dates">{{ school.dates }}</span></div>
+    {%- endfor %}
   </section>
 
   <div class="contact" id="contact">

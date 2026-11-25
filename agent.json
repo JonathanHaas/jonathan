@@ -25,6 +25,13 @@
       "media_type": "text/markdown"
     },
     {
+      "id": "curriculum_vitae_json",
+      "description": "Retrieve the curriculum vitae as structured data in the JSON Resume schema (https://jsonresume.org/schema). Also returned for GET / with Accept: application/json.",
+      "endpoint": "https://jonathan.jawnhaas.xyz/resume.json",
+      "method": "GET",
+      "media_type": "application/json"
+    },
+    {
       "id": "contact_information",
       "description": "Read professional contact guidance and public profile links.",
       "endpoint": "https://jonathan.jawnhaas.xyz/contact.md",
@@ -57,6 +64,11 @@
       "url": "https://jonathan.jawnhaas.xyz/sitemap.xml",
       "method": "GET",
       "media_type": "application/xml"
+    },
+    "resume_json": {
+      "url": "https://jonathan.jawnhaas.xyz/resume.json",
+      "method": "GET",
+      "media_type": "application/json"
     }
   },
   "api": {

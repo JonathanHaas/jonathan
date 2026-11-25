@@ -1,11 +1,19 @@
 // Content negotiation for agents (Cloudflare Pages Functions).
 // - GET / with Accept preferring text/markdown returns index.md as text/markdown.
 // - GET /?mode=agent returns a structured JSON description for agents.
+// - GET /resume.json returns the CV as JSON Resume, with CORS open for reads.
+// - GET / with Accept preferring application/json returns resume.json.
 // - Any 404 requested with Accept preferring text/markdown returns a short Markdown error.
 // - Browsers (Accept: text/html) get the Eleventy-generated static site.
 
 const MARKDOWN = "text/markdown; charset=utf-8";
 const JSON_TYPE = "application/json; charset=utf-8";
+const RESUME_HEADERS = {
+  "Content-Type": JSON_TYPE,
+  "Access-Control-Allow-Origin": "*",
+  "Cache-Control": "no-cache",
+  Link: '<https://jsonresume.org/schema>; rel="describedby"',
+};
 
 const NOT_FOUND_MD = `# 404: page not found
 
@@ -35,17 +43,21 @@ function parseAccept(header) {
     .filter((e) => e.type);
 }
 
-// True when the client explicitly asks for Markdown at least as strongly as HTML.
-export function prefersMarkdown(header) {
+// True when the client explicitly names this type at least as strongly as HTML.
+// Wildcards (*/*) don't count, so browsers and curl's default keep getting HTML.
+function prefersType(header, type) {
   const entries = parseAccept(header);
-  const qOf = (type) => {
-    const hit = entries.find((e) => e.type === type);
+  const qOf = (t) => {
+    const hit = entries.find((e) => e.type === t);
     return hit ? hit.q : 0;
   };
-  const md = qOf("text/markdown");
-  if (md <= 0) return false;
-  return md >= qOf("text/html");
+  const wanted = qOf(type);
+  if (wanted <= 0) return false;
+  return wanted >= qOf("text/html");
 }
+
+export const prefersMarkdown = (header) => prefersType(header, "text/markdown");
+export const prefersJson = (header) => prefersType(header, "application/json");
 
 function withHeaders(response, extra) {
   const headers = new Headers(response.headers);
@@ -74,6 +86,23 @@ export async function onRequest(context) {
       return new Response(method === "HEAD" ? null : asset.body, {
         status: 200,
         headers: { "Content-Type": JSON_TYPE, "Cache-Control": "no-cache" },
+      });
+    }
+  }
+
+  // The CV as JSON Resume (https://jsonresume.org/schema), readable from any origin.
+  if (url.pathname === "/resume.json") {
+    const asset = await next();
+    if (!asset.ok) return asset;
+    return withHeaders(asset, RESUME_HEADERS);
+  }
+
+  if (isHome && !wantsMarkdown && prefersJson(request.headers.get("Accept"))) {
+    const asset = await env.ASSETS.fetch(new URL("/resume.json", url));
+    if (asset.ok) {
+      return new Response(method === "HEAD" ? null : asset.body, {
+        status: 200,
+        headers: { ...RESUME_HEADERS, Vary: "Accept", "Content-Location": "/resume.json" },
       });
     }
   }
