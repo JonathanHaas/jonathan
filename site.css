@@ -40,6 +40,7 @@ header.top { display: flex; justify-content: space-between; align-items: center;
 nav { display: flex; gap: 18px; flex-wrap: wrap; }
 nav a { font: 500 .95rem var(--display); color: var(--muted); text-decoration: none; letter-spacing: .04em; }
 nav a:hover { color: var(--walnut); }
+nav a[aria-current="page"] { color: var(--walnut); border-bottom: 2px solid var(--walnut); padding-bottom: 1px; }
 footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 /* Homepage --------------------------------------------------------------- */

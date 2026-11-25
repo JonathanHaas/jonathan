@@ -2,10 +2,10 @@
 <header class="top">
   <p class="mark"><a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">L. Jonathan Haas</a></p>
   <nav aria-label="{% if lang == 'es' %}Primaria{% elif lang == 'zh' %}主导航{% else %}Primary{% endif %}">
-    <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">{% if lang == "es" %}Inicio{% elif lang == "zh" %}首页{% else %}Home{% endif %}</a>
-    <a href="/about/">{% if lang == "es" %}Acerca de{% elif lang == "zh" %}关于{% else %}About{% endif %}</a>
-    <a href="/contact/">{% if lang == "es" %}Contacto{% elif lang == "zh" %}联系{% else %}Contact{% endif %}</a>
-    <a href="/privacy/">{% if lang == "es" %}Privacidad{% elif lang == "zh" %}隐私{% else %}Privacy{% endif %}</a>
+    <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}"{% if page.url == '/' or page.url == '/es/' or page.url == '/zh/' %} aria-current="page"{% endif %}>{% if lang == "es" %}Inicio{% elif lang == "zh" %}首页{% else %}Home{% endif %}</a>
+    <a href="/about/"{% if page.url == '/about/' %} aria-current="page"{% endif %}>{% if lang == "es" %}Acerca de{% elif lang == "zh" %}关于{% else %}About{% endif %}</a>
+    <a href="/contact/"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>{% if lang == "es" %}Contacto{% elif lang == "zh" %}联系{% else %}Contact{% endif %}</a>
+    <a href="/privacy/"{% if page.url == '/privacy/' %} aria-current="page"{% endif %}>{% if lang == "es" %}Privacidad{% elif lang == "zh" %}隐私{% else %}Privacy{% endif %}</a>
     <a href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">CV</a>
   </nav>
   <nav class="lang-switch" aria-label="Language / Idioma / 语言">
