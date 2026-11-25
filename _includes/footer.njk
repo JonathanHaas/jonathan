@@ -1,5 +1,10 @@
 <footer>
   <span>© 2026 L. Jonathan Haas</span>
-  <span><a href="/">Home</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy/">Privacy</a></span>
-  <span>Made in Fishtown, Philadelphia</span>
+  <span>
+    <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">{% if lang == "es" %}Inicio{% elif lang == "zh" %}首页{% else %}Home{% endif %}</a> ·
+    <a href="/about/">{% if lang == "es" %}Acerca de{% elif lang == "zh" %}关于{% else %}About{% endif %}</a> ·
+    <a href="/contact/">{% if lang == "es" %}Contacto{% elif lang == "zh" %}联系{% else %}Contact{% endif %}</a> ·
+    <a href="/privacy/">{% if lang == "es" %}Privacidad{% elif lang == "zh" %}隐私{% else %}Privacy{% endif %}</a>
+  </span>
+  <span>{% if lang == "es" %}Hecho en Fishtown, Filadelfia{% elif lang == "zh" %}制作于费城Fishtown{% else %}Made in Fishtown, Philadelphia{% endif %}</span>
 </footer>
