@@ -102,6 +102,12 @@ Key front matter variables the layout reads:
 | `extraLinks` | Additional `<link>` tags — used on the homepage for llms.txt, agent.json, resume.json, index.md |
 | `bodyClass` | `home` or `interior` — drives CSS layout variants |
 
+### Active nav indicator
+
+The current page is highlighted in the nav with a walnut underline. This is implemented using `aria-current="page"` on the active link — the ARIA attribute that screen readers already use to identify the current page serves double duty as the CSS hook (`nav a[aria-current="page"]`). No JavaScript, no extra classes. The language switcher uses the same pattern with `aria-current="true"` on the active language button.
+
+A `border-bottom: 2px solid transparent` is applied to all nav links at all times so the active indicator doesn't shift the layout when it appears.
+
 ### Font loading
 
 Fonts (Jost, Karla) are loaded from Google Fonts with `font-display: optional`. This prevents the FOUT (flash of unstyled text) that caused the fixed header to visually shift on mobile during page navigation. With `optional`, the browser uses the web font only if it's already in cache; otherwise it uses the system font and never swaps. First-time visitors see the system font; repeat visitors (and anyone who has stayed on a page long enough for fonts to cache) see Jost and Karla.
@@ -174,10 +180,12 @@ zh/                 Mandarin Simplified templates
   about/index.html    About
   contact/index.html  Contact
   privacy/index.html  Privacy
-about/              English interior pages
+about/              English interior page
   index.html
-contact/index.html
-privacy/index.html
+contact/
+  index.html
+privacy/
+  index.html
 functions/          Cloudflare Pages Functions (_middleware.js)
 src/                Worker entry point and resume-view transform
 dist/               Build output (gitignored)
@@ -186,6 +194,6 @@ resume_es.json      CV data — Spanish translation (homepage only)
 resume_zh.json      CV data — Mandarin Simplified translation (homepage only)
 site.css            All styles
 _headers            Cloudflare response headers (security, CSP, content types)
-sitemap.xml         Sitemap (all 14 URL variants)
+sitemap.xml         Sitemap (all 15 URL variants)
 wrangler.jsonc      Cloudflare Workers config
 ```
