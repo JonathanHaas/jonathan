@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{% if lang == 'zh' %}zh-Hans{% elif lang == 'es' %}es{% else %}en{% endif %}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="author" content="L. Jonathan Haas">
+{% if keywords %}<meta name="keywords" content="{{ keywords }}">{% endif %}
+<link rel="canonical" href="{{ canonical }}">
+<meta name="theme-color" content="#5f6b45">
+{% if hasTranslations %}
+<link rel="alternate" hreflang="en" href="https://jonathan.jawnhaas.xyz/">
+<link rel="alternate" hreflang="es" href="https://jonathan.jawnhaas.xyz/es/">
+<link rel="alternate" hreflang="zh-Hans" href="https://jonathan.jawnhaas.xyz/zh/">
+<link rel="alternate" hreflang="x-default" href="https://jonathan.jawnhaas.xyz/">
+{% endif %}
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+{% if extraLinks %}{% for link in extraLinks %}
+<link rel="{{ link.rel }}"{% if link.type %} type="{{ link.type }}"{% endif %} href="{{ link.href }}"{% if link.title %} title="{{ link.title }}"{% endif %}>
+{% endfor %}{% endif %}
+<meta property="og:type" content="{{ ogType if ogType else 'profile' }}">
+<meta property="og:site_name" content="L. Jonathan Haas">
+<meta property="og:title" content="{{ ogTitle if ogTitle else title }}">
+<meta property="og:description" content="{{ ogDescription if ogDescription else description }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:locale" content="{{ ogLocale if ogLocale else 'en_US' }}">
+{% if ogLocaleAlt %}<meta property="og:locale:alternate" content="{{ ogLocaleAlt }}">{% endif %}
+<meta property="og:image" content="https://jonathan.jawnhaas.xyz/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1732">
+<meta property="og:image:height" content="908">
+<meta property="og:image:alt" content="{{ ogImageAlt if ogImageAlt else 'L. Jonathan Haas, Director of Web Development at the University of Pennsylvania.' }}">
+{% if showOgProfile %}
+<meta property="profile:first_name" content="Jonathan">
+<meta property="profile:last_name" content="Haas">
+{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ ogTitle if ogTitle else title }}">
+<meta name="twitter:description" content="{{ ogDescription if ogDescription else description }}">
+<meta name="twitter:image" content="https://jonathan.jawnhaas.xyz/og-image.png">
+<meta name="twitter:image:alt" content="{{ ogImageAlt if ogImageAlt else 'L. Jonathan Haas, Director of Web Development at the University of Pennsylvania.' }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% if lang == "zh" %}
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+{% else %}
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+{% endif %}
+<link rel="stylesheet" href="/site.css">
+{% include "jsonld.njk" %}
+</head>
+<body class="{{ bodyClass if bodyClass else '' }}">
+<div class="wrap">
+  {% include "header.njk" %}
+  {{ content | safe }}
+  {% include "footer.njk" %}
+</div>
+</body>
+</html>

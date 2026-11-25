@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy · L. Jonathan Haas</title>
-<meta name="description" content="Privacy information for jonathan.jawnhaas.xyz, the personal professional website of L. Jonathan Haas.">
-<link rel="canonical" href="https://jonathan.jawnhaas.xyz/privacy/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="text/markdown" href="/privacy.md" title="Privacy (Markdown)">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
-</head>
-<body class="interior">
-<div class="wrap">
-  {% include "header.njk" %}
-  <main id="main">
+---
+layout: base.njk
+lang: en
+title: "Privacy · L. Jonathan Haas"
+description: "Privacy information for jonathan.jawnhaas.xyz, the personal professional website of L. Jonathan Haas."
+canonical: "https://jonathan.jawnhaas.xyz/privacy/"
+bodyClass: interior
+ogType: website
+ogLocale: en_US
+ogImageAlt: "L. Jonathan Haas, Director of Web Development at the University of Pennsylvania."
+extraLinks:
+  - {rel: "alternate", type: "text/markdown", href: "/privacy.md", title: "Privacy (Markdown)"}
+---
+<main id="main" tabindex="-1">
     <h1>Privacy</h1>
     <p class="lede">This is a small personal professional website. It is designed to provide information without asking visitors to create an account, submit a form, or provide personal information.</p>
 
     <h2>Information handled by the site</h2>
-    <p>This site does not include a contact form, user accounts, advertising, or ecommerce. It does not intentionally set its own tracking cookies or build profiles of visitors. Like most websites, the hosting and security provider may process ordinary request information needed to deliver and protect the site, such as an IP address, requested URL, browser information, timestamps, and diagnostic or security events. That operational data may be retained according to the provider’s configuration and policies.</p>
+    <p>This site does not include a contact form, user accounts, advertising, or ecommerce. It does not intentionally set its own tracking cookies or build profiles of visitors. Like most websites, the hosting and security provider may process ordinary request information needed to deliver and protect the site, such as an IP address, requested URL, browser information, timestamps, and diagnostic or security events. That operational data may be retained according to the provider's configuration and policies.</p>
 
     <h2>Email and external services</h2>
     <p>If you choose to contact me by email, your message, email address, and any information you include will be processed by the email services used by you and by me. I use that information to read and respond to your message, maintain necessary correspondence, and protect against abuse. Please do not send passwords, payment information, private student records, or other highly sensitive information through ordinary email.</p>
@@ -29,8 +24,4 @@
 
     <h2>Questions and changes</h2>
     <p>If the site later adds analytics, forms, accounts, or other features that materially change how information is handled, this page should be updated to describe them. The current version reflects the site as published on November 22, 2026. Questions about this notice or requests concerning an email you sent can be directed to <a href="mailto:jonathan.haas@gmail.com">jonathan.haas@gmail.com</a>.</p>
-  </main>
-  {% include "footer.njk" %}
-</div>
-</body>
-</html>
+</main>
