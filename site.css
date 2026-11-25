@@ -34,14 +34,14 @@ a:focus-visible { outline: 2px solid var(--walnut); outline-offset: 3px; border-
 .skip:focus-visible { outline-color: var(--walnut-dark); }
 main:focus { outline: none; }
 .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-.site-header { position: sticky; top: 0; z-index: 100; background: var(--oat); border-bottom: 1px solid var(--rule); }
+.site-header { position: sticky; top: 0; z-index: 100; background: var(--moss); border-bottom: 1px solid rgba(0,0,0,.18); }
 header.top { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; gap: 18px; flex-wrap: wrap; }
 .mark { margin: 0; font: 600 1.35rem var(--display); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
-.mark a { color: var(--walnut-dark); text-decoration: none; }
+.mark a { color: var(--linen); text-decoration: none; }
 nav { display: flex; gap: 18px; flex-wrap: wrap; }
-nav a { font: 500 .95rem var(--display); color: var(--muted); text-decoration: none; letter-spacing: .04em; border-bottom: 2px solid transparent; padding-bottom: 1px; }
-nav a:hover { color: var(--walnut); }
-nav a[aria-current="page"] { color: var(--walnut); border-bottom-color: var(--walnut); }
+nav a { font: 500 .95rem var(--display); color: rgba(247,243,236,.7); text-decoration: none; letter-spacing: .04em; border-bottom: 2px solid transparent; padding-bottom: 1px; }
+nav a:hover { color: var(--linen); }
+nav a[aria-current="page"] { color: var(--linen); border-bottom-color: var(--linen); }
 footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 /* Homepage --------------------------------------------------------------- */
@@ -118,9 +118,9 @@ footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--m
 
 /* Language switcher ------------------------------------------------------ */
 .lang-switch { display: flex; gap: 6px; align-items: center; }
-.lang-switch a { font: 500 .78rem var(--display); color: var(--muted); text-decoration: none; letter-spacing: .08em; padding: 2px 5px; border-radius: 3px; }
-.lang-switch a:hover { color: var(--walnut); }
-.lang-switch a[aria-current] { background: var(--walnut); color: var(--linen); }
+.lang-switch a { font: 500 .78rem var(--display); color: rgba(247,243,236,.7); text-decoration: none; letter-spacing: .08em; padding: 2px 5px; border-radius: 3px; }
+.lang-switch a:hover { color: var(--linen); }
+.lang-switch a[aria-current] { background: rgba(0,0,0,.22); color: var(--linen); }
 
 /* Chinese font ----------------------------------------------------------- */
 :lang(zh) { font-family: "Noto Sans SC", "Karla", "Helvetica Neue", Arial, sans-serif; }
