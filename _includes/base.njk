@@ -52,8 +52,12 @@
 {% include "jsonld.njk" %}
 </head>
 <body class="{{ bodyClass if bodyClass else '' }}">
+<div class="site-header">
+  <div class="wrap">
+    {% include "header.njk" %}
+  </div>
+</div>
 <div class="wrap">
-  {% include "header.njk" %}
   {{ content | safe }}
   {% include "footer.njk" %}
 </div>

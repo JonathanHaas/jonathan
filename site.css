@@ -34,7 +34,8 @@ a:focus-visible { outline: 2px solid var(--walnut); outline-offset: 3px; border-
 .skip:focus-visible { outline-color: var(--walnut-dark); }
 main:focus { outline: none; }
 .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-header.top { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; gap: 18px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+.site-header { position: sticky; top: 0; z-index: 100; background: var(--oat); border-bottom: 1px solid var(--rule); }
+header.top { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; gap: 18px; flex-wrap: wrap; }
 .mark { margin: 0; font: 600 1.35rem var(--display); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
 .mark a { color: var(--walnut-dark); text-decoration: none; }
 nav { display: flex; gap: 18px; flex-wrap: wrap; }
