@@ -44,19 +44,38 @@ The `_headers` file configures response headers for all routes — security head
 
 Spanish (`/es/`) and Mandarin Simplified (`/zh/`) are maintained as separate Eleventy templates, following the directory-prefix pattern Google recommends for multilingual sites. Every page has a translated equivalent: `/es/about/`, `/zh/contact/`, and so on. The tradeoff is explicit: more files to keep in sync when content changes, but zero build-time complexity, no extra dependencies, and complete control over how each language reads.
 
-The URL structure is:
-```
-/           English (default)
-/es/        Spanish
-/zh/        Mandarin Simplified
-/about/     English interior
-/es/about/  Spanish interior
-/zh/about/  Mandarin Simplified interior
-```
+#### All pages across all languages
 
-Each page sets `alternateBase: /about/` (or `/contact/`, `/privacy/`) in its front matter. The base layout uses this to generate correct hreflang tags and to wire the language switcher so it links to the same page in the other language rather than the homepage.
+| Page | English | Spanish | Mandarin Simplified |
+|---|---|---|---|
+| Home | `/` | `/es/` | `/zh/` |
+| About | `/about/` | `/es/about/` | `/zh/about/` |
+| Contact | `/contact/` | `/es/contact/` | `/zh/contact/` |
+| Privacy | `/privacy/` | `/es/privacy/` | `/zh/privacy/` |
 
-Job titles and company names stay in English because that's standard practice on multilingual professional resumes — the audience for a resume understands English job titles regardless of their language.
+That's 12 HTML pages total. All 12 URLs are in `sitemap.xml`, along with the CV PDF and machine-readable endpoints.
+
+#### How the language switcher and hreflang work
+
+Interior pages set `alternateBase: /about/` (or `/contact/`, `/privacy/`) in their front matter. The base layout uses this in two ways:
+1. Generates hreflang tags pointing at the correct page in each language (not just the homepage)
+2. Wires the EN / ES / 中文 switcher buttons to land on the same page in the other language
+
+Homepage variants set `hasTranslations: true` instead — the layout emits fixed hreflang URLs for the three homepage equivalents. Neither pattern requires touching any code; it's driven entirely by front matter.
+
+#### Language-specific details
+
+| Language | `lang` value | `<html lang>` | Font | `ogLocale` |
+|---|---|---|---|---|
+| English | `en` | `en` | Jost + Karla | `en_US` |
+| Spanish | `es` | `es` | Jost + Karla | `es_ES` |
+| Mandarin | `zh` | `zh-Hans` | Jost + Karla + Noto Sans SC | `zh_CN` |
+
+Noto Sans SC is added only for `zh` pages — the Google Fonts request is conditional in `base.njk` to avoid loading a large CJK font on English and Spanish pages. The CSS selector `:lang(zh)` applies it to body text; display elements (nav, headings, logo) get a matching `font-family` override.
+
+#### What stays in English
+
+Homepages pull from JSON Resume data files (`resume_es.json`, `resume_zh.json`), so job titles and company names stay in English. This is standard practice for multilingual professional resumes — those terms are understood internationally and searching for translated titles is less effective. Interior pages (about, contact, privacy) are fully translated prose.
 
 ### Security headers and CSP
 
@@ -105,21 +124,18 @@ All three are linked from `<head>` so crawlers can find them, and the Worker ser
 `resume.json` is the single source of truth for all CV content. The data pipeline is:
 
 ```
-resume.json → _data/cv.js → src/resume-view.js → Eleventy templates
+resume.json    → _data/cv.js    → index.html     (English homepage)
+resume_es.json → _data/cv_es.js → es/index.html  (Spanish homepage)
+resume_zh.json → _data/cv_zh.js → zh/index.html  (Mandarin homepage)
 ```
 
-For translations:
-
-```
-resume_es.json → _data/cv_es.js → es/index.html (homepage only; interior pages are static translations)
-resume_zh.json → _data/cv_zh.js → zh/index.html
-```
+Interior pages (about, contact, privacy) don't use the data pipeline — they're static translated HTML templates. `src/resume-view.js` transforms the raw JSON Resume schema into the view model the templates use; it's a pure function shared between the Eleventy build and the Worker.
 
 ## Maintenance notes
 
-**When you update CV content:** apply the same change to `resume_es.json` and `resume_zh.json` to keep the homepage data in sync. For prose on interior pages (about, contact, privacy), edit the corresponding templates in `es/` and `zh/` directly.
+**When you update CV content:** edit `resume.json` for the English homepage, then apply the same change to `resume_es.json` and `resume_zh.json` to keep the Spanish and Mandarin homepages in sync. For prose on interior pages (about, contact, privacy), edit the three corresponding templates — `about/index.html`, `es/about/index.html`, `zh/about/index.html` — directly.
 
-**When you add a new page:** create the page at `/page-name/index.html`, then create `es/page-name/index.html` and `zh/page-name/index.html`. Add `alternateBase: /page-name/` to all three templates. Update `sitemap.xml` with all three URLs.
+**When you add a new page:** create the page at `/page-name/index.html`, then create `es/page-name/index.html` and `zh/page-name/index.html`. Add `alternateBase: /page-name/` to all three. Add nav and footer links to `_includes/header.njk` and `_includes/footer.njk` (follow the `{% if lang == "es" %}` pattern already there). Update `sitemap.xml` with all three URLs.
 
 **When you edit the JSON-LD block in `_includes/jsonld.njk`:** regenerate the CSP hash and update `_headers`:
 
@@ -153,10 +169,15 @@ es/                 Spanish templates
   about/index.html    About
   contact/index.html  Contact
   privacy/index.html  Privacy
-zh/                 Mandarin Simplified templates (same structure as es/)
+zh/                 Mandarin Simplified templates
+  index.html          Homepage
+  about/index.html    About
+  contact/index.html  Contact
+  privacy/index.html  Privacy
 about/              English interior pages
-contact/
-privacy/
+  index.html
+contact/index.html
+privacy/index.html
 functions/          Cloudflare Pages Functions (_middleware.js)
 src/                Worker entry point and resume-view transform
 dist/               Build output (gitignored)
