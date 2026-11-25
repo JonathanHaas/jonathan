@@ -82,7 +82,7 @@ resume_zh.json → _data/cv_zh.js → zh/index.html
 
 **When you update CV content:** apply the same change to `resume_es.json` and `resume_zh.json` to keep translations in sync.
 
-**When you edit the JSON-LD block in `index.html`:** regenerate the CSP hash and update `_headers`:
+**When you edit the JSON-LD block in `_includes/jsonld.njk`:** regenerate the CSP hash and update `_headers`:
 
 ```sh
 curl -s https://jonathan.jawnhaas.xyz/ \
@@ -103,17 +103,21 @@ npm test         # build + run tests
 ## Project structure
 
 ```
-_data/          Eleventy global data (cv.js, cv_es.js, cv_zh.js)
-_includes/      Nunjucks partials (header.njk, footer.njk)
-es/             Spanish page template
-zh/             Mandarin (Simplified) page template
-functions/      Cloudflare Pages Functions (_middleware.js)
-src/            Worker entry point and resume-view transform
-dist/           Build output (gitignored)
-resume.json     CV data (JSON Resume schema)
-resume_es.json  CV data — Spanish translation
-resume_zh.json  CV data — Mandarin Simplified translation
-site.css        All styles
-_headers        Cloudflare response headers (security, CSP, content types)
-wrangler.jsonc  Cloudflare Workers config
+_data/              Eleventy global data (cv.js, cv_es.js, cv_zh.js)
+_includes/
+  base.njk          Shared HTML layout — all pages inherit from this
+  jsonld.njk        JSON-LD structured data include (shared across pages)
+  header.njk        Site header with language switcher
+  footer.njk        Site footer
+es/                 Spanish page template
+zh/                 Mandarin (Simplified) page template
+functions/          Cloudflare Pages Functions (_middleware.js)
+src/                Worker entry point and resume-view transform
+dist/               Build output (gitignored)
+resume.json         CV data (JSON Resume schema)
+resume_es.json      CV data — Spanish translation
+resume_zh.json      CV data — Mandarin Simplified translation
+site.css            All styles
+_headers            Cloudflare response headers (security, CSP, content types)
+wrangler.jsonc      Cloudflare Workers config
 ```
