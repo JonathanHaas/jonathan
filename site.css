@@ -34,23 +34,22 @@
   --body: "Karla", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --oat: #131211;
-    --linen: #1c1b19;
-    --walnut: #a07856;
-    --walnut-dark: #b08966;
-    --moss: #7a9b60;
-    --brass: #9e8040;
-    --ink: #ede8e0;
-    --muted: #8a8278;
-    --rule: #2a2822;
-  }
-  body {
-    background-image:
-      repeating-linear-gradient(0deg, rgba(160,120,86,.04) 0 2px, transparent 2px 6px),
-      repeating-linear-gradient(90deg, rgba(160,120,86,.03) 0 2px, transparent 2px 6px);
-  }
+html[data-theme="dark"] {
+  --oat: #131211;
+  --linen: #1c1b19;
+  --walnut: #a07856;
+  --walnut-dark: #b08966;
+  --moss: #7a9b60;
+  --brass: #9e8040;
+  --ink: #ede8e0;
+  --muted: #8a8278;
+  --rule: #2a2822;
+  color-scheme: dark;
+}
+html[data-theme="dark"] body {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(160,120,86,.04) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(90deg, rgba(160,120,86,.03) 0 2px, transparent 2px 6px);
 }
 /* Foundation ------------------------------------------------------------- */
 * { box-sizing: border-box; }
@@ -169,6 +168,14 @@ footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--m
 /* Chinese font ----------------------------------------------------------- */
 :lang(zh) { font-family: "Noto Sans SC", "Karla", "Helvetica Neue", Arial, sans-serif; }
 :lang(zh) .mark, :lang(zh) nav a, :lang(zh) h1, :lang(zh) h2, :lang(zh) h3, :lang(zh) .cv { font-family: "Noto Sans SC", "Jost", system-ui, sans-serif; }
+
+/* Theme toggle ------------------------------------------------------------ */
+.theme-toggle { background: none; border: none; cursor: pointer; padding: 2px 5px; border-radius: 3px; color: var(--muted); display: flex; align-items: center; }
+.theme-toggle:hover { color: var(--walnut); }
+.theme-toggle:focus-visible { outline: 2px solid var(--walnut); outline-offset: 2px; border-radius: 2px; }
+.theme-toggle .icon-sun { display: none; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
 /* View transitions -------------------------------------------------------- */
 @view-transition { navigation: auto; }
