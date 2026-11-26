@@ -1,0 +1,48 @@
+---
+layout: base.njk
+lang: en
+title: "Credits · L. Jonathan Haas"
+description: "Open source software and open fonts that power jonathan.jawnhaas.xyz."
+canonical: "https://jonathan.jawnhaas.xyz/credits/"
+bodyClass: interior
+alternateBase: /credits/
+ogType: website
+---
+<main id="main" tabindex="-1">
+  <h1>Credits</h1>
+  <p class="lede">This site is built on open source software and open fonts. Here's what's under the hood.</p>
+
+  <h2>Software</h2>
+
+  <div class="card">
+    <p><strong><a href="https://www.11ty.dev/">Eleventy</a></strong> — static site generator. Runs the build, processes Nunjucks templates, and generates the final HTML. MIT license.</p>
+  </div>
+
+  <div class="card">
+    <p><strong><a href="https://mozilla.github.io/nunjucks/">Nunjucks</a></strong> — templating language used for layouts, includes, and localization conditionals. Bundled with Eleventy. BSD-2-Clause license.</p>
+  </div>
+
+  <div class="card">
+    <p><strong><a href="https://github.com/cloudflare/workers-sdk">Wrangler</a></strong> — Cloudflare CLI used for local development and deployment. Apache 2.0 license.</p>
+  </div>
+
+  <h2>Schemas and standards</h2>
+
+  <div class="card">
+    <p><strong><a href="https://jsonresume.org/">JSON Resume</a></strong> — open schema for structured CV data. <code>resume.json</code> follows this spec, which keeps content separate from presentation and makes the data portable.</p>
+  </div>
+
+  <h2>Typefaces</h2>
+
+  <div class="card">
+    <p><strong><a href="https://fonts.google.com/specimen/Jost">Jost</a></strong> — display typeface by indestructible type*. Used for headings, navigation, and labels. SIL Open Font License.</p>
+  </div>
+
+  <div class="card">
+    <p><strong><a href="https://fonts.google.com/specimen/Karla">Karla</a></strong> — body typeface by Jonny Pinhorn. Used for running text. SIL Open Font License.</p>
+  </div>
+
+  <div class="card">
+    <p><strong><a href="https://fonts.google.com/noto/specimen/Noto+Sans+SC">Noto Sans SC</a></strong> — Simplified Chinese typeface by Google. Loaded only on the Mandarin pages. SIL Open Font License.</p>
+  </div>
+</main>

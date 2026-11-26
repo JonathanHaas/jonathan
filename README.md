@@ -51,9 +51,10 @@ Spanish (`/es/`) and Mandarin Simplified (`/zh/`) are maintained as separate Ele
 | Home | `/` | `/es/` | `/zh/` |
 | About | `/about/` | `/es/about/` | `/zh/about/` |
 | Contact | `/contact/` | `/es/contact/` | `/zh/contact/` |
+| Credits | `/credits/` | `/es/credits/` | `/zh/credits/` |
 | Privacy | `/privacy/` | `/es/privacy/` | `/zh/privacy/` |
 
-That's 12 HTML pages total. All 12 URLs are in `sitemap.xml`, along with the CV PDF and machine-readable endpoints.
+That's 15 HTML pages total. All 15 URLs are in `sitemap.xml`, along with the CV PDF and machine-readable endpoints.
 
 #### How the language switcher and hreflang work
 
@@ -185,15 +186,19 @@ es/                 Spanish templates
   index.html          Homepage
   about/index.html    About
   contact/index.html  Contact
+  credits/index.html  Credits
   privacy/index.html  Privacy
 zh/                 Mandarin Simplified templates
   index.html          Homepage
   about/index.html    About
   contact/index.html  Contact
+  credits/index.html  Credits
   privacy/index.html  Privacy
 about/              English interior page
   index.html
 contact/
+  index.html
+credits/
   index.html
 privacy/
   index.html
@@ -205,6 +210,6 @@ resume_es.json      CV data — Spanish translation (homepage only)
 resume_zh.json      CV data — Mandarin Simplified translation (homepage only)
 site.css            All styles
 _headers            Cloudflare response headers (security, CSP, content types)
-sitemap.xml         Sitemap (all 15 URL variants)
+sitemap.xml         Sitemap (all 18 URL variants)
 wrangler.jsonc      Cloudflare Workers config
 ```
