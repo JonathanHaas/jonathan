@@ -3,7 +3,7 @@
   <p class="mark"><a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">L. Jonathan Haas</a></p>
   <nav aria-label="{% if lang == 'es' %}Primaria{% elif lang == 'zh' %}主导航{% else %}Primary{% endif %}">
     <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}"{% if page.url == '/' or page.url == '/es/' or page.url == '/zh/' %} aria-current="page"{% endif %}>{% if lang == "es" %}Inicio{% elif lang == "zh" %}首页{% else %}Home{% endif %}</a>
-    <a href="/now/"{% if page.url == '/now/' %} aria-current="page"{% endif %}>{% if lang == "es" %}Ahora{% elif lang == "zh" %}近况{% else %}Now{% endif %}</a>
+    {% if lang == "en" %}<a href="/now/"{% if page.url == '/now/' %} aria-current="page"{% endif %}>Now</a>{% endif %}
     <a href="/L-Jonathan-Haas-CV.pdf" download="L-Jonathan-Haas-CV.pdf">CV</a>
   </nav>
   <nav class="lang-switch" aria-label="Language / Idioma / 语言">
