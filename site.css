@@ -32,7 +32,25 @@
   --rule: #d9cfc0;
   --display: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
   --body: "Karla", "Helvetica Neue", Arial, sans-serif;
-  color-scheme: light;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --oat: #1c1510;
+    --linen: #241c14;
+    --walnut: #c4956a;
+    --walnut-dark: #d4a87a;
+    --moss: #8fa870;
+    --brass: #c4a04e;
+    --ink: #e8dece;
+    --muted: #9e9080;
+    --rule: #3a2e22;
+  }
+  body {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(196,149,106,.035) 0 2px, transparent 2px 6px),
+      repeating-linear-gradient(90deg, rgba(196,149,106,.03) 0 2px, transparent 2px 6px);
+  }
 }
 /* Foundation ------------------------------------------------------------- */
 * { box-sizing: border-box; }
@@ -151,3 +169,10 @@ footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--m
 /* Chinese font ----------------------------------------------------------- */
 :lang(zh) { font-family: "Noto Sans SC", "Karla", "Helvetica Neue", Arial, sans-serif; }
 :lang(zh) .mark, :lang(zh) nav a, :lang(zh) h1, :lang(zh) h2, :lang(zh) h3, :lang(zh) .cv { font-family: "Noto Sans SC", "Jost", system-ui, sans-serif; }
+
+/* View transitions -------------------------------------------------------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: 120ms ease-out both fade-out; }
+::view-transition-new(root) { animation: 120ms ease-in both fade-in; }
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
