@@ -13,6 +13,8 @@ export default function (eleventyConfig) {
     "*.xml",
     "robots.txt",
     "site.css",
+    "theme.js",
+    "fonts/",
   ];
 
   eleventyConfig.on("eleventy.before", () => rm("dist", { recursive: true, force: true }));
