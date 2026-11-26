@@ -90,6 +90,17 @@ Homepages pull from JSON Resume data files (`resume_es.json`, `resume_zh.json`),
 
 The `extraLinks` front matter on the English homepage adds `<link>` tags for `/llms.txt`, `/agent.json`, `/index.md`, and `/resume.json`. These endpoints don't have translated equivalents, so the Spanish and Mandarin homepages omit `extraLinks`.
 
+### Analytics
+
+The site uses [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) — a cookieless, privacy-preserving analytics tool. It works differently from GA4 or other traditional analytics:
+
+- **No cookies** — it doesn't set any cookies in the visitor's browser, so no consent banner is required under GDPR/PECR
+- **No fingerprinting** — it doesn't track individuals across sessions or sites; it counts page traffic, not people
+- **No personal data** — IP addresses and other identifiers aren't stored; Cloudflare uses a privacy-preserving model at the edge
+- **One script tag** — the beacon loads from `static.cloudflareinsights.com` and pings `cloudflareinsights.com`; both domains are allowlisted in the CSP
+
+The script is in `base.njk` before `</body>` so it runs on every page in all three languages. The analytics dashboard is in the Cloudflare account under Observability → Web Analytics.
+
 ### Security headers and CSP
 
 `_headers` delivers security headers at the edge via Cloudflare. Key decisions:
