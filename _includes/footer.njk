@@ -1,7 +1,6 @@
 <footer>
   <span>
-    <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}">{% if lang == "es" %}Inicio{% elif lang == "zh" %}首页{% else %}Home{% endif %}</a> ·
-    <a href="/now/">Now</a> ·
+    <a href="{% if lang == 'es' %}/es/{% elif lang == 'zh' %}/zh/{% else %}/{% endif %}" aria-label="{% if lang == 'es' %}Inicio{% elif lang == 'zh' %}首页{% else %}Home{% endif %}">🏠</a> ·
     <a href="{% if lang == 'es' %}/es/about/{% elif lang == 'zh' %}/zh/about/{% else %}/about/{% endif %}">{% if lang == "es" %}Acerca de{% elif lang == "zh" %}关于{% else %}About{% endif %}</a> ·
     <a href="{% if lang == 'es' %}/es/contact/{% elif lang == 'zh' %}/zh/contact/{% else %}/contact/{% endif %}">{% if lang == "es" %}Contacto{% elif lang == "zh" %}联系{% else %}Contact{% endif %}</a> ·
     <a href="{% if lang == 'es' %}/es/privacy/{% elif lang == 'zh' %}/zh/privacy/{% else %}/privacy/{% endif %}">{% if lang == "es" %}Privacidad{% elif lang == "zh" %}隐私{% else %}Privacy{% endif %}</a> ·
