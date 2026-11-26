@@ -35,21 +35,21 @@
   color-scheme: light dark;
 }
 html[data-theme="dark"] {
-  --oat: #131211;
-  --linen: #1c1b19;
-  --walnut: #a07856;
-  --walnut-dark: #b08966;
-  --moss: #7a9b60;
-  --brass: #9e8040;
-  --ink: #ede8e0;
+  --oat: #1a1814;
+  --linen: #242018;
+  --walnut: #c4b07a;
+  --walnut-dark: #d4c08a;
+  --moss: #7a98b0;
+  --brass: #c4a050;
+  --ink: #ece7dd;
   --muted: #8a8278;
-  --rule: #2a2822;
+  --rule: #302820;
   color-scheme: dark;
 }
 html[data-theme="dark"] body {
   background-image:
-    repeating-linear-gradient(0deg, rgba(160,120,86,.04) 0 2px, transparent 2px 6px),
-    repeating-linear-gradient(90deg, rgba(160,120,86,.03) 0 2px, transparent 2px 6px);
+    repeating-linear-gradient(0deg, rgba(196,176,122,.03) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(90deg, rgba(196,176,122,.025) 0 2px, transparent 2px 6px);
 }
 /* Foundation ------------------------------------------------------------- */
 * { box-sizing: border-box; }
