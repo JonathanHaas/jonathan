@@ -94,7 +94,7 @@ The `extraLinks` front matter on the English homepage adds `<link>` tags for `/l
 `_headers` delivers security headers at the edge via Cloudflare. Key decisions:
 
 - **`frame-ancestors 'none'`** in the CSP replaces `X-Frame-Options` — it's the modern equivalent and supported by every browser that matters
-- **SHA-256 hash in `script-src`** instead of `'unsafe-inline'` — the site has one inline script (the JSON-LD structured data block). Rather than opening up all inline scripts, the CSP allows only the exact hash of that block. If the JSON-LD changes, the hash needs to be regenerated (see below)
+- **SHA-256 hash in `script-src`** instead of `'unsafe-inline'` — the site has one inline script (the JSON-LD structured data block). Rather than opening up all inline scripts, the CSP allows only the exact hash of that block plus the Cloudflare Web Analytics domain. If the JSON-LD changes, the hash needs to be regenerated (see below)
 - **`upgrade-insecure-requests`** upgrades any mixed-content HTTP sub-requests to HTTPS at the browser level, as a belt-and-suspenders measure alongside HSTS
 
 ### Shared base layout
