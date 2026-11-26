@@ -89,6 +89,7 @@ footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--m
 .social-links { display: flex; gap: 14px; align-items: center; }
 .social-links a { color: var(--muted); display: flex; transition: color .15s; }
 .social-links a:hover { color: var(--ink); }
+footer > span:last-child { margin-left: auto; text-align: right; }
 
 /* Homepage --------------------------------------------------------------- */
 .hero { padding: 48px 0 40px; border-bottom: 6px solid var(--walnut); }
