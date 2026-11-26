@@ -11,6 +11,7 @@ Personal resume site for L. Jonathan Haas. Live at [jonathan.jawnhaas.xyz](https
 | Resume data | [JSON Resume](https://jsonresume.org/) schema (`resume.json`) |
 | Hosting | Cloudflare Worker with static asset binding |
 | Deployment | Cloudflare Workers Builds (auto-deploys on push to `main`) |
+| Analytics | [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) (cookieless, free) |
 
 ## Architectural decisions
 
