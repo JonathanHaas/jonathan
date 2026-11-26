@@ -36,20 +36,20 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --oat: #1c1510;
-    --linen: #241c14;
-    --walnut: #c4956a;
-    --walnut-dark: #d4a87a;
-    --moss: #8fa870;
-    --brass: #c4a04e;
-    --ink: #e8dece;
-    --muted: #9e9080;
-    --rule: #3a2e22;
+    --oat: #131211;
+    --linen: #1c1b19;
+    --walnut: #a07856;
+    --walnut-dark: #b08966;
+    --moss: #7a9b60;
+    --brass: #9e8040;
+    --ink: #ede8e0;
+    --muted: #8a8278;
+    --rule: #2a2822;
   }
   body {
     background-image:
-      repeating-linear-gradient(0deg, rgba(196,149,106,.035) 0 2px, transparent 2px 6px),
-      repeating-linear-gradient(90deg, rgba(196,149,106,.03) 0 2px, transparent 2px 6px);
+      repeating-linear-gradient(0deg, rgba(160,120,86,.04) 0 2px, transparent 2px 6px),
+      repeating-linear-gradient(90deg, rgba(160,120,86,.03) 0 2px, transparent 2px 6px);
   }
 }
 /* Foundation ------------------------------------------------------------- */
