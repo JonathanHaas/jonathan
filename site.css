@@ -170,12 +170,13 @@ footer { padding: 36px 0 44px; border-top: 1px solid var(--rule); color: var(--m
 :lang(zh) .mark, :lang(zh) nav a, :lang(zh) h1, :lang(zh) h2, :lang(zh) h3, :lang(zh) .cv { font-family: "Noto Sans SC", "Jost", system-ui, sans-serif; }
 
 /* Theme toggle ------------------------------------------------------------ */
-.theme-toggle { background: none; border: none; cursor: pointer; padding: 2px 5px; border-radius: 3px; color: var(--muted); display: flex; align-items: center; }
+.theme-toggle { position: fixed; top: 10px; right: 14px; z-index: 101; background: none; border: none; cursor: pointer; padding: 4px; color: var(--muted); display: flex; align-items: center; }
 .theme-toggle:hover { color: var(--walnut); }
 .theme-toggle:focus-visible { outline: 2px solid var(--walnut); outline-offset: 2px; border-radius: 2px; }
 .theme-toggle .icon-sun { display: none; }
 html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+@media print { .theme-toggle { display: none; } }
 
 /* View transitions -------------------------------------------------------- */
 @view-transition { navigation: auto; }
